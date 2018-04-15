@@ -1,11 +1,16 @@
 package com.projectx.fisioapp.app.activity
 
 import android.app.DatePickerDialog
+import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import com.projectx.fisioapp.R
+import com.projectx.fisioapp.app.utils.CircleTransform
 import com.projectx.fisioapp.app.utils.toastIt
 import com.projectx.fisioapp.domain.interactor.ErrorCompletion
 import com.projectx.fisioapp.domain.interactor.users.getuser.GetUserIntImpl
@@ -13,6 +18,7 @@ import com.projectx.fisioapp.domain.interactor.users.getuser.GetUserInteractor
 import com.projectx.fisioapp.domain.interactor.users.updateuser.UpdateUserIntImpl
 import com.projectx.fisioapp.domain.interactor.users.updateuser.UpdateUserInteractor
 import com.projectx.fisioapp.domain.model.User
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_user_detail.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -32,6 +38,8 @@ class UserDetailActivity : ParentActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         setListeners()
+
+        roundedPhoto(R.drawable.no_image)
 
         getUser()
 
@@ -78,6 +86,14 @@ class UserDetailActivity : ParentActivity() {
             ).show()
         }
 
+    }
+
+    private fun roundedPhoto(imageId: Int) {
+        val img = BitmapFactory.decodeResource(resources, imageId)
+        val round = RoundedBitmapDrawableFactory.create(resources, img)
+
+        round.isCircular = true
+        ivPhoto.setImageDrawable(round)
     }
 
     private fun getUser() {
@@ -163,24 +179,35 @@ class UserDetailActivity : ParentActivity() {
 
 
     private fun fillFileds(user: User) {
-        etName.setText(user.name)
-        etLastName.setText(user.lastName)
-        etEmail.setText(user.email)
-        etAddress.setText(user.address)
-        etPhone.setText(user.phone)
-        etBirthdate.setText(formatDateToString(user.birthDate))
-        etNationalID.setText(user.nationalId)
-        etFellowshipNumber.setText(user.fellowshipNumber)
-        etRegistrationDate.setText(formatDateToString(user.registrationDate))
-        etLastLoginDate.setText(formatDateToString(user.lastLoginDate))
-        swProfesional.isChecked = user.isProfessional
-        if (user.gender == "female") {
-            rbFemale.isChecked = true
-            rbMale.isChecked = false
-        } else if (user.gender == "male") {
-            rbMale.isChecked = true
-            rbFemale.isChecked = false
+        Picasso.with(this)
+                .load("https://i.pinimg.com/originals/50/54/3a/50543adfc79f3209893aa528d35142ba.jpg")
+                .transform(CircleTransform())
+                .placeholder(R.drawable.no_image)
+                .error(android.R.drawable.ic_menu_report_image)
+                .into(ivPhoto)
+        user.name?.let { etName.setText(it) }
+        user.lastName?.let { etLastName.setText(it) }
+        user.email?.let { etEmail.setText(it) }
+        user.address?.let { etAddress.setText(it) }
+        user.phone?.let { etPhone.setText(it) }
+        user.birthDate?.let { etBirthdate.setText(formatDateToString(it)) }
+        user.nationalId?.let { etNationalID.setText(it) }
+        user.fellowshipNumber?.let { etFellowshipNumber.setText(it) }
+        user.registrationDate?.let { etRegistrationDate.setText(formatDateToString(it)) }
+        user.lastLoginDate?.let { etLastLoginDate.setText(formatDateToString(it)) }
+        user.name?.let { etName.setText(it) }
+        user.name?.let { etName.setText(it) }
+        user.isProfessional?.let { swProfesional.isChecked = it }
+        user.gender?.let {
+            if (it == "female") {
+                rbFemale.isChecked = true
+                rbMale.isChecked = !rbFemale.isChecked
+            } else if (it == "male") {
+                rbMale.isChecked = true
+                rbFemale.isChecked = !rbMale.isChecked
+            }
         }
+
     }
 
     private fun getFieldsOrErrors(): Pair<User?, List<String>?> {
@@ -209,10 +236,10 @@ class UserDetailActivity : ParentActivity() {
                 gender,
                 etAddress.text.toString(),
                 etPhone.text.toString(),
-                formatStringToDate(etBirthdate.text.toString()),
+                etBirthdate.text.toString()?.let {  formatStringToDate(it) },
                 etNationalID.text.toString(),
-                formatStringToDate(etRegistrationDate.text.toString()),
-                formatStringToDate(etLastLoginDate.text.toString())
+                etRegistrationDate.text.toString()?.let { formatStringToDate(it) },
+                etLastLoginDate.text.toString().let { formatStringToDate(it) }
         )
         return Pair(user, null)
     }
@@ -229,10 +256,16 @@ class UserDetailActivity : ParentActivity() {
         return d
     }
 
-    private fun formatStringToDate(date: String): Date {
-        val sdf = SimpleDateFormat("dd/MM/yyyy")
-        val d: Date = sdf.parse(date)
-        return d
+    private fun formatStringToDate(date: String): Date? {
+        try {
+            val sdf = SimpleDateFormat("dd/MM/yyyy")
+            val d: Date = sdf.parse(date)
+            return d
+        } catch (e: Exception) {
+            Log.e("Error", e.localizedMessage)
+        }
+        return null
+
     }
 
 }

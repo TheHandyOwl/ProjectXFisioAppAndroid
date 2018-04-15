@@ -28,16 +28,16 @@ internal interface APIV1FisioAppInterface {
     @PUT(BuildConfig.FISIOAPP_USER_SERVER_PATH + "/{id}")
     fun doUpdateUser(@Header("x-access-token") token: String,
                      @Path("id") id: String,
-                     @Field("name") name: String,
-                     @Field("lastName") lastName: String,
-                     @Field("email") email: String,
-                     @Field("isProfessional") isProfessional: Boolean,
-                     @Field("fellowshipNumber") fellowshipNumber: String,
-                     @Field("gender") gender: String,
-                     @Field("address") address: String,
-                     @Field("phone") phone: String,
-                     @Field("birthDate") birthDate: Date,
-                     @Field("nationalId") nationalId: String): Call<UpdateUserResponse>
+                     @Field("name") name: String?,
+                     @Field("lastName") lastName: String?,
+                     @Field("email") email: String?,
+                     @Field("isProfessional") isProfessional: Boolean?,
+                     @Field("fellowshipNumber") fellowshipNumber: String?,
+                     @Field("gender") gender: String?,
+                     @Field("address") address: String?,
+                     @Field("phone") phone: String?,
+                     @Field("birthDate") birthDate: Date?,
+                     @Field("nationalId") nationalId: String?): Call<UpdateUserResponse>
 
 
     /******** SERVICES OPERATIONS *********/

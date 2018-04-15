@@ -23,7 +23,7 @@
                 android:id="@+id/ivLeftColumn"
                 android:layout_width="@dimen/layout_width_height_none"
                 android:layout_height="@dimen/layout_width_height_none"
-                android:contentDescription="@string/user_image_description"
+                android:contentDescription="@string/form_user_detail_background_description"
                 android:background="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="@+id/constraintLayoutForm"
                 app:layout_constraintEnd_toStartOf="@+id/leftColumnGuideline"
@@ -38,11 +38,44 @@
                 app:layout_constraintGuide_percent="0.32" />
 
             <TextView
+                android:id="@+id/lblPhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_margin_default"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/gradient_left_column_fields"
+                android:labelFor="@+id/etName"
+                android:paddingEnd="@dimen/activity_margin_default"
+                android:paddingStart="@dimen/activity_margin_wide"
+                android:text="@string/form_user_detail_photo"
+                android:textAppearance="@android:style/TextAppearance.Inverse"
+                app:layout_constraintEnd_toEndOf="@id/ivLeftColumn"
+                app:layout_constraintEnd_toStartOf="@+id/leftColumnGuideline"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@id/ivLeftColumn"
+                app:layout_constraintTop_toTopOf="@+id/ivLeftColumn"
+                app:layout_goneMarginStart="8dp"
+                app:layout_goneMarginTop="16dp" />
+
+            <ImageView
+                android:id="@+id/ivPhoto"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/form_user_detail_profile_photo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/leftColumnGuideline"
+                app:layout_constraintTop_toTopOf="@+id/lblPhoto"
+                app:srcCompat="@drawable/no_image" />
+
+            <TextView
                 android:id="@+id/lblName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_margin_default"
-                android:layout_marginTop="@dimen/activity_margin_wide"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/gradient_left_column_fields"
                 android:labelFor="@+id/etName"
                 android:paddingEnd="@dimen/activity_margin_default"
@@ -51,9 +84,9 @@
                 android:textAppearance="@android:style/TextAppearance.Inverse"
                 app:layout_constraintEnd_toEndOf="@id/ivLeftColumn"
                 app:layout_constraintEnd_toStartOf="@+id/leftColumnGuideline"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.98"
                 app:layout_constraintStart_toStartOf="@id/ivLeftColumn"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivPhoto"
                 app:layout_goneMarginStart="8dp"
                 app:layout_goneMarginTop="16dp" />
 
