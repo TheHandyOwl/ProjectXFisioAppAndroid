@@ -25,7 +25,7 @@ android {
             buildConfigField "String", "FISIOAPP_TESTS_DB_NAME", '"FisioAppTests.sqlite"'
 
             // Server
-            buildConfigField "String", "HTTP_SERVER", "\"http://192.168.1.41:3000\""
+            buildConfigField "String", "HTTP_SERVER", "\"http://192.168.13.33:3000\""
             //buildConfigField "String", "HTTP_SERVER", "\"http://192.168.2.48:3000\""
 
             // Files
@@ -45,7 +45,7 @@ android {
             buildConfigField "String", "FISIOAPP_TESTS_DB_NAME", '"FisioAppTests.sqlite"'
 
             // Server
-            buildConfigField "String", "HTTP_SERVER", "\"http://192.168.1.41:3000\""
+            buildConfigField "String", "HTTP_SERVER", "\"http://192.168.13.33:3000\""
 
             //Files
             buildConfigField "String", "FISIOAPP_APPOINTMENTS_PROFESSIONAL_SERVER_PATH", "\"/apiv1/appointments/professional\""
