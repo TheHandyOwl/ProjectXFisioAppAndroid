@@ -63,10 +63,10 @@ open class ParentActivity : AppCompatActivity() {
     fun checkOptionSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
             R.id.user_details -> {
-                Router().moveToAboutMeActivity(this)
+                Router.moveToAboutMeActivity(this)
             }
             R.id.about_us -> {
-                Router().moveToAboutUsActivity(this)
+                Router.moveToAboutUsActivity(this)
             }
             R.id.logout -> {
                 AlertDialog.Builder(this)
@@ -77,7 +77,7 @@ open class ParentActivity : AppCompatActivity() {
                         })
                         .setPositiveButton("LOGOUT", { dialog, _ ->
                             token = ""
-                            Router().moveToLoginActivity(this)
+                            Router.moveToLoginActivity(this)
                             dialog.dismiss()
                         })
                         .show()
@@ -98,13 +98,13 @@ open class ParentActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.ic_menu_calendar -> {
-                    Router().moveToCalendarActivity(main)
+                    Router.moveToCalendarActivity(main)
                 }
                 R.id.ic_menu_products -> {
-                    Router().moveToProductsActivity(main)
+                    Router.moveToProductsActivity(main)
                 }
                 R.id.ic_menu_services -> {
-                    Router().moveToServicesActivity(main)
+                    Router.moveToServicesActivity(main)
                 }
             }
 

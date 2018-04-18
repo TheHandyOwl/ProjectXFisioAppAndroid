@@ -11,7 +11,7 @@ import com.projectx.fisioapp.app.utils.RQ_OPERATION
 import com.projectx.fisioapp.domain.model.Catalog
 
 
-class Router {
+object Router {
 
     fun navigateFromCalendarActivityToAppointmentDetailActivity(main: CalendarActivity, appointment: Appointment){
         val intent = AppointmentDetailActivity.newInstance(main.baseContext, appointment)

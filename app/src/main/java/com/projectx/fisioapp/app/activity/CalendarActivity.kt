@@ -36,7 +36,7 @@ class CalendarActivity : ParentActivity(),
         setContentView(R.layout.activity_calendar)
 
         if (!checkToken()) {
-            Router().navigateFromCalendarActivityToLoginActivity(this)
+            Router.navigateFromCalendarActivityToLoginActivity(this)
         }
 
         title = getString(R.string.calendar_title)
@@ -94,7 +94,7 @@ class CalendarActivity : ParentActivity(),
 
     // ***** Fragment AppointmentsList listener *****
     override fun onSelectedAppointment(appointment: Appointment) {
-        Router().navigateFromCalendarActivityToAppointmentDetailActivity(this, appointment)
+        Router.navigateFromCalendarActivityToAppointmentDetailActivity(this, appointment)
     }
 
     // ***** CalendarFragment listener *****
