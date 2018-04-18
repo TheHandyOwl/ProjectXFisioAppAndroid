@@ -2,6 +2,7 @@ package com.projectx.fisioapp.app.activity
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -9,6 +10,7 @@ import com.projectx.fisioapp.R
 import com.projectx.fisioapp.app.fragment.AppointmentsListFragment
 import com.projectx.fisioapp.app.fragment.CalendarFragment
 import com.projectx.fisioapp.app.router.Router
+import com.projectx.fisioapp.app.utils.RQ_OPERATION
 import com.projectx.fisioapp.app.utils.toastIt
 import com.projectx.fisioapp.domain.interactor.ErrorCompletion
 import com.projectx.fisioapp.domain.interactor.SuccessCompletion
@@ -27,6 +29,7 @@ class CalendarActivity : ParentActivity(),
 
     private lateinit var calendarFragment: CalendarFragment
     lateinit var appointmentsListFragment: AppointmentsListFragment
+    private var lastDate: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +58,7 @@ class CalendarActivity : ParentActivity(),
 
             val getAppointmentsForDate: GetAppointmentsForDateInteractor = GetAppointmentsForDateIntImpl(context)
             try{
+                lastDate = date
                 getAppointmentsForDate.execute(token, date,
                         success = object : SuccessCompletion<Appointments> {
                             override fun successCompletion(e: Appointments) {
@@ -69,6 +73,12 @@ class CalendarActivity : ParentActivity(),
             } catch (e: Exception) {
                 toastIt(context, "Error: " + e.localizedMessage)
             }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == RQ_OPERATION && resultCode == RESULT_OK) {
+            getAppointmentsForDate(this, lastDate)
         }
     }
 

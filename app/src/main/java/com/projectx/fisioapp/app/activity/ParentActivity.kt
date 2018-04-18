@@ -2,6 +2,7 @@ package com.projectx.fisioapp.app.activity
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -52,6 +53,11 @@ open class ParentActivity : AppCompatActivity() {
 
     protected fun checkUId(): Boolean {
         return uId.length !== 0
+    }
+
+    fun finalizeActivity(result: Int, intent: Intent) {
+        setResult(result, intent)
+        finish()
     }
 
     fun checkOptionSelected(item: MenuItem?): Boolean {
