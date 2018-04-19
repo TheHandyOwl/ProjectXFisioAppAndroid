@@ -42,22 +42,21 @@ class CalendarActivity : ParentActivity(),
         if (!checkToken()) {
             Router.navigateFromCalendarActivityToLoginActivity(this)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         title = getString(R.string.calendar_title)
 
         addBottomBar(this)
 
-        if(lastDate.isBlank()){
+        if(lastDate.isBlank() && checkToken()){
 
             val date = Date()
             lastDate = formatDate(date, true)
             getAppointmentsForDate(this, lastDate)
         }
-
-    }
-
-    override fun onResume() {
-        super.onResume()
 
         calendarFragment = fragmentManager.findFragmentById(R.id.calendar_fragment) as CalendarFragment
         appointmentsListFragment = fragmentManager.findFragmentById(R.id.appointments_fragment) as AppointmentsListFragment

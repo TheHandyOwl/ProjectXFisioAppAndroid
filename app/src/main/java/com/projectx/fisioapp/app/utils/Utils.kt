@@ -20,10 +20,10 @@ enum class CatalogType {
 
 fun formatDate(date: Date, shortFormat: Boolean = false) : String {
 
-    var dateFormat = "EEEE, dd/MM/yyy - HH:mm"
+    var dateFormat = "EEEE, dd/MM/yyyy - HH:mm"
 
     when(shortFormat){
-        true -> dateFormat = "dd/MM/yyy"
+        true -> dateFormat = "yyyy-MM-dd"
     }
     val format = SimpleDateFormat(dateFormat)
     return format.format(date)
