@@ -1,5 +1,6 @@
 package com.projectx.fisioapp.app.activity
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -62,17 +63,27 @@ class AppointmentDetailActivity : ParentActivity(), AppointmentDetailListener {
                         success = object : SuccessCompletion<String> {
                             override fun successCompletion(e: String) {
                                 toastIt(view.context, e)
+
+                                val intent = Intent()
+                                intent.putExtra("result", -1)
+                                finalizeActivity(Activity.RESULT_OK, intent)
                             }
                         },
                         error = object : ErrorCompletion {
                             override fun errorCompletion(errorMessage: String) {
                                 toastIt(view.context, errorMessage)
+                                finalizeActivity(Activity.RESULT_CANCELED, Intent())
                             }
                         })
             } catch (e: Exception) {
                 toastIt(view.context, "Error: " + e.localizedMessage )
             }
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finalizeActivity(Activity.RESULT_CANCELED, Intent())
     }
 
 

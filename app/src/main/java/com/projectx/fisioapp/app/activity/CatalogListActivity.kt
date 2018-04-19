@@ -51,7 +51,7 @@ class CatalogListActivity : ParentActivity() {
         setContentView(R.layout.activity_catalog_list)
 
         if (!checkToken()) {
-            Router().navigateFromCatalogListActivitytoLoginActivity(this)
+            Router.navigateFromCatalogListActivitytoLoginActivity(this)
         }
 
         type = intent.getSerializableExtra(EXTRA_CATALOG_TYPE) as CatalogType
@@ -73,7 +73,7 @@ class CatalogListActivity : ParentActivity() {
         super.onResume()
 
         catalog_list_add_element.setOnClickListener { _ ->
-            Router().navigateFromParentActivityToNewCatalogActivity(this, type)
+            Router.navigateFromParentActivityToNewCatalogActivity(this, type)
         }
 
 

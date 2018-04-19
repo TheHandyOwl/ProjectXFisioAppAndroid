@@ -146,10 +146,4 @@ class CatalogDetailActivity : ParentActivity(), CatalogItemListener {
         finalizeActivity(Activity.RESULT_CANCELED, Intent())
     }
 
-
-
-    private fun finalizeActivity(result: Int, intent: Intent) {
-        setResult(result, intent)
-        finish()
-    }
 }

@@ -13,11 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--<RelativeLayout-->
-            <!--android:id="@+id/relLayoutMiddle"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent">-->
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -28,7 +23,7 @@
                     android:name="com.projectx.fisioapp.app.fragment.CalendarFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="0dp"
                     android:layout_weight="1" />
 
                 <fragment
@@ -36,14 +31,10 @@
                     android:name="com.projectx.fisioapp.app.fragment.AppointmentsListFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="0dp"
                     android:layout_weight="1" />
 
             </LinearLayout>
-
-
-        <!--</RelativeLayout>-->
-
 
         <RelativeLayout
             android:id="@+id/relLayoutBotBar"
