@@ -22,7 +22,7 @@ class AppointmentItemRecyclerViewAdapter(private val mParentActivity: CalendarAc
     init {
         mOnClickListener = View.OnClickListener { v ->
             val item = v.tag as Appointment
-            Router().navigateFromCalendarActivityToAppointmentDetailActivity(mParentActivity, item)
+            Router.navigateFromCalendarActivityToAppointmentDetailActivity(mParentActivity, item)
         }
     }
 

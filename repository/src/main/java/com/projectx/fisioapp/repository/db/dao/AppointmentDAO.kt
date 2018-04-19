@@ -36,7 +36,6 @@ class AppointmentDAO(dbHelper: DBHelper) : DAOPersistable<AppoinmentData> {
     }
 
 
-
     private fun contentValues(id: String, isConfirmed: Boolean, isCancelled: Boolean): ContentValues {
         val content = ContentValues()
 
@@ -122,7 +121,7 @@ class AppointmentDAO(dbHelper: DBHelper) : DAOPersistable<AppoinmentData> {
 
     override fun insert(element: AppoinmentData): Long = dbReadWriteOnlyConn.insert(DBAppointmentConstants.TABLE_APPOINTMENT, null, contentValues(element))
 
-        override fun delete(id: String): String = dbReadWriteOnlyConn.delete(DBAppointmentConstants.TABLE_APPOINTMENT,
+    override fun delete(id: String): String = dbReadWriteOnlyConn.delete(DBAppointmentConstants.TABLE_APPOINTMENT,
             DBAppointmentConstants.KEY_DATABASE_ID + " = ?",
             arrayOf(id)).toString()
 
@@ -170,7 +169,7 @@ class AppointmentDAO(dbHelper: DBHelper) : DAOPersistable<AppoinmentData> {
 
         val cursor = dbReadOnlyConn.query(DBAppointmentConstants.TABLE_APPOINTMENT,
                 DBAppointmentConstants.ALL_COLUMNS,
-                DBAppointmentConstants.KEY_DATE + " LIKE '%"+type+"%'",
+                DBAppointmentConstants.KEY_DATE + " LIKE '%" + type + "%'",
                 null,
                 "",
                 "",
@@ -186,11 +185,11 @@ class AppointmentDAO(dbHelper: DBHelper) : DAOPersistable<AppoinmentData> {
 
 
     private fun getDate(date: String): Date {
-      val format = SimpleDateFormat(DBAppointmentConstants.FORMAT_DATE)
+        val format = SimpleDateFormat(DBAppointmentConstants.FORMAT_DATE)
         return format.parse(date)
     }
 
-    private fun getDate(date: Date) : String {
+    private fun getDate(date: Date): String {
         val format = SimpleDateFormat(DBAppointmentConstants.FORMAT_DATE)
         return format.format(date);
     }
