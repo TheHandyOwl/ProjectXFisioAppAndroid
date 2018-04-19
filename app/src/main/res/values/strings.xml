@@ -70,4 +70,6 @@
     <string name="menu_exit_message">Do you want to exit now?</string>
     <string name="menu_logout_cancel">CANCEL</string>
     <string name="menu_logout_exit">LOGOUT</string>
+    <string name="fragment_title_login">LOGIN</string>
+    <string name="fragment_title_register">REGISTER</string>
 </resources>
