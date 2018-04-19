@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle"
+    android:padding="@dimen/form_cell_padding">
+    <corners
+        android:bottomRightRadius="@dimen/form_cell_radius"
+        android:bottomLeftRadius="@dimen/form_cell_radius"
+        android:topLeftRadius="@dimen/form_cell_radius"
+        android:topRightRadius="@dimen/form_cell_radius"/>
+    <solid android:color="@color/colorWhite"/>
+    <stroke
+        android:width="@dimen/form_cell_border"
+        android:color="@color/colorPrimaryDark" />
+</shape>

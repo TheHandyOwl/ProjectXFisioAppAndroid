@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Default -->
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303f9f</color>
+    <color name="colorAccent">#ff4081</color>
+
+    <!-- Dark Screen -->
+    <color name="login_screen_background">#444444</color>
+    <color name="login_screen_text_color">#6dffbf</color>
+    <color name="login_screen_hint_color">#52afaa</color>
+
+    <!-- Menu & Tabs -->
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorGrey">#c3c3c3</color>
+
+</resources>

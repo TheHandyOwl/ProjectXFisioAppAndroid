@@ -1,0 +1,94 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+
+    compileSdkVersion compileSdkVersion_version
+
+    defaultConfig {
+        minSdkVersion minSdkVersion_version
+        targetSdkVersion targetSdkVersion_version
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // Enabling multidex support.
+        multiDexEnabled true
+
+    }
+
+    buildTypes {
+        debug {
+            // DB
+            buildConfigField "String", "FISIOAPP_CACHE_DB_NAME", '"FisioAppCache.sqlite"'
+            buildConfigField "String", "FISIOAPP_TESTS_DB_NAME", '"FisioAppTests.sqlite"'
+
+            // Server
+            buildConfigField "String", "HTTP_SERVER", "\"http://192.168.1.41:3000\""
+            //buildConfigField "String", "HTTP_SERVER", "\"http://192.168.2.48:3000\""
+
+            // Files
+            buildConfigField "String", "FISIOAPP_APPOINTMENTS_PROFESSIONAL_SERVER_PATH", "\"/apiv1/appointments/professional\""
+            buildConfigField "String", "FISIOAPP_APPOINTMENTS_SERVER_PATH", "\"/apiv1/appointments\""
+            buildConfigField "String", "FISIOAPP_PRODUCTS_SERVER_PATH", "\"/apiv1/products\""
+            buildConfigField "String", "FISIOAPP_SERVICES_SERVER_PATH", "\"/apiv1/services\""
+            buildConfigField "String", "FISIOAPP_USER_SERVER_PATH", "\"/apiv1/users\""
+            buildConfigField "String", "FISIOAPP_USERS_AUTHENTICATE_SERVER_PATH", "\"/apiv1/login\""
+            buildConfigField "String", "FISIOAPP_USERS_REGISTER_SERVER_PATH", "\"/apiv1/register\""
+            buildConfigField "String", "FISIOAPP_USERS_SERVER_PATH", "\"/apiv1/users\""
+
+        }
+        release {
+            // DB
+            buildConfigField "String", "FISIOAPP_CACHE_DB_NAME", '"FisioAppCache.sqlite"'
+            buildConfigField "String", "FISIOAPP_TESTS_DB_NAME", '"FisioAppTests.sqlite"'
+
+            // Server
+            buildConfigField "String", "HTTP_SERVER", "\"http://192.168.1.41:3000\""
+
+            //Files
+            buildConfigField "String", "FISIOAPP_APPOINTMENTS_PROFESSIONAL_SERVER_PATH", "\"/apiv1/appointments/professional\""
+            buildConfigField "String", "FISIOAPP_APPOINTMENTS_SERVER_PATH", "\"/apiv1/appointments\""
+            buildConfigField "String", "FISIOAPP_PRODUCTS_SERVER_PATH", "\"/apiv1/products\""
+            buildConfigField "String", "FISIOAPP_SERVICES_SERVER_PATH", "\"/apiv1/services\""
+            buildConfigField "String", "FISIOAPP_USER_SERVER_PATH", "\"/apiv1/users\""
+            buildConfigField "String", "FISIOAPP_USERS_AUTHENTICATE_SERVER_PATH", "\"/apiv1/login\""
+            buildConfigField "String", "FISIOAPP_USERS_REGISTER_SERVER_PATH", "\"/apiv1/register\""
+            buildConfigField "String", "FISIOAPP_USERS_SERVER_PATH", "\"/apiv1/users\""
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    implementation "com.android.support:appcompat-v7:$appcompat_version"
+
+    // Tests
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    // Multidex
+    implementation 'com.android.support:multidex:1.0.3'
+
+    // Retrofit + gson + okhttp3
+    implementation ('com.squareup.retrofit2:retrofit:2.4.0') {
+        exclude module: 'okhttp'
+    }
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+}
+repositories {
+    mavenCentral()
+}

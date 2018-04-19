@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/appointment_list_content"
+    android:padding="@dimen/activity_margin_default">
+
+    <TextView
+        android:id="@+id/appointment_list_id"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:textColor="@color/colorPrimaryDark"
+        tools:text="MyDate" />
+
+    <TextView
+        android:id="@+id/appointment_list_content_field"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appointment_list_id"
+        tools:text="myValue" />
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" >
+        <shape
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="rectangle"
+            android:padding="@dimen/form_cell_padding">
+            <gradient
+                android:startColor="@color/colorPrimaryDark"
+                android:endColor="@color/colorPrimary"
+                android:angle="270" />
+            <stroke
+                android:width="@dimen/form_cell_border"
+                android:color="@color/colorWhite" />
+            <corners
+                android:radius="@dimen/form_cell_radius"
+                android:bottomRightRadius="@dimen/form_cell_radius"
+                android:bottomLeftRadius="@dimen/form_cell_radius"
+                android:topLeftRadius="@dimen/form_cell_radius"
+                android:topRightRadius="@dimen/form_cell_radius"/>
+        </shape>
+    </item>
+    <item>
+        <shape
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="rectangle"
+            android:padding="@dimen/form_cell_padding">
+            <gradient
+                android:startColor="@color/colorPrimary"
+                android:endColor="@color/colorPrimaryDark"
+                android:angle="270" />
+            <stroke
+                android:width="@dimen/form_cell_border"
+                android:color="@color/colorGrey" />
+            <corners
+                android:radius="@dimen/form_cell_radius"
+                android:bottomRightRadius="@dimen/form_cell_radius"
+                android:bottomLeftRadius="@dimen/form_cell_radius"
+                android:topLeftRadius="@dimen/form_cell_radius"
+                android:topRightRadius="@dimen/form_cell_radius"/>
+        </shape>
+    </item>
+</selector>

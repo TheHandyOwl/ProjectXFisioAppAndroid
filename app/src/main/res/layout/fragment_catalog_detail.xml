@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_margin_default"
+    >
+
+    <TextView
+        android:id="@+id/activity_catalog_detail_name_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/catalog_name" />
+
+    <EditText
+        android:id="@+id/activity_catalog_detail_name_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:text="@string/catalog_name" />
+
+    <TextView
+        android:id="@+id/activity_catalog_detail_desc_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/catalog_desc" />
+
+    <EditText
+        android:id="@+id/activity_catalog_detail_desc_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:text="@string/catalog_desc" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/activity_catalog_detail_price_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/catalog_price" />
+
+        <EditText
+            android:id="@+id/activity_catalog_detail_price_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            tools:text="50 €" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/is_active_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/catalog_active" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_catalog_detail_save_bttn"
+            android:text="@string/catalog_save_bttn"/>
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_catalog_detail_delete_bttn"
+            android:text="@string/catalog_delete_bttn"/>
+    </LinearLayout>
+
+
+</LinearLayout>
