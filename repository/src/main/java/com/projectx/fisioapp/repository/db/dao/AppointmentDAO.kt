@@ -27,13 +27,15 @@ class AppointmentDAO(dbHelper: DBHelper) : DAOPersistable<AppoinmentData> {
         content.put(DBAppointmentConstants.KEY_PROFESSIONAL_ID, entityData.professionalId)
         content.put(DBAppointmentConstants.KEY_IS_CONFIRMED, entityData.isConfirmed)
         content.put(DBAppointmentConstants.KEY_IS_CANCELLED, entityData.isCancelled)
-        content.put(DBAppointmentConstants.KEY_DATE, entityData.date.toString())
+        content.put(DBAppointmentConstants.KEY_DATE, getDate(entityData.date))
         content.put(DBAppointmentConstants.KEY_LATITUDE, entityData.latitude)
         content.put(DBAppointmentConstants.KEY_LONGITUDE, entityData.longitude)
         content.put(DBAppointmentConstants.KEY_EXTRA_INFO, entityData.extraInfo)
 
         return content
     }
+
+
 
     private fun contentValues(id: String, isConfirmed: Boolean, isCancelled: Boolean): ContentValues {
         val content = ContentValues()
@@ -168,8 +170,8 @@ class AppointmentDAO(dbHelper: DBHelper) : DAOPersistable<AppoinmentData> {
 
         val cursor = dbReadOnlyConn.query(DBAppointmentConstants.TABLE_APPOINTMENT,
                 DBAppointmentConstants.ALL_COLUMNS,
-                "strftime('%Y-%m-%d', ?) = ?",
-                arrayOf(type),
+                DBAppointmentConstants.KEY_DATE + " LIKE '%"+type+"%'",
+                null,
                 "",
                 "",
                 DBAppointmentConstants.KEY_DATE + " ASC")
@@ -177,13 +179,20 @@ class AppointmentDAO(dbHelper: DBHelper) : DAOPersistable<AppoinmentData> {
         while (cursor.moveToNext()) {
             val entity = entityFromCursor(cursor)!!
             result.add(entity)
-
         }
 
         return result
     }
 
 
-    private fun getDate(date: String): Date = SimpleDateFormat("EEE MMM d HH:mm:ss z yyyy").parse(date)
+    private fun getDate(date: String): Date {
+      val format = SimpleDateFormat(DBAppointmentConstants.FORMAT_DATE)
+        return format.parse(date)
+    }
+
+    private fun getDate(date: Date) : String {
+        val format = SimpleDateFormat(DBAppointmentConstants.FORMAT_DATE)
+        return format.format(date);
+    }
 
 }

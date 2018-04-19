@@ -57,4 +57,6 @@ object DBAppointmentConstants {
     val QUERY_COUNT = "SELECT COUNT(*) FROM $TABLE_APPOINTMENT"
 
     val CREATE_DATABASE_SCRIPTS = arrayOf(SQL_SCRIPT_CREATE_APPOINTMENT_TABLE)
+
+    val FORMAT_DATE = "yyyy-MM-dd hh:mm"
 }

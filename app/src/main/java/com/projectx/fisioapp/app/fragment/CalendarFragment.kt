@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
 import com.projectx.fisioapp.R
+import com.projectx.fisioapp.app.utils.formatValue
 
 @Suppress("DEPRECATION")
 class CalendarFragment : Fragment() {
@@ -28,7 +29,11 @@ class CalendarFragment : Fragment() {
         calendarView?.setOnDateChangeListener { _, year, month, dayOfMonth ->
             //Note that months are indexed from 0. So, 0 means january, 1 means February, 2 means march etc.
             val updatedMonth = month + 1
-            val date = "$year-$updatedMonth-$dayOfMonth"
+
+            val dayFormatted = formatValue(dayOfMonth)
+            val monthFormatted = formatValue(updatedMonth)
+
+            val date = "$year-$monthFormatted-$dayFormatted"
 
             onSelectedDateListener?.onSelectedDate(date)
         }

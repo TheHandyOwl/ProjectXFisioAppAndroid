@@ -66,10 +66,10 @@ open class ParentActivity : AppCompatActivity() {
                 AlertDialog.Builder(this)
                         .setTitle(getString(R.string.logout))
                         .setMessage(getString(R.string.menu_exit_message))
-                        .setNegativeButton("CANCEL", { dialog, _ ->
+                        .setNegativeButton(getString(R.string.menu_logout_cancel), { dialog, _ ->
                             dialog.dismiss()
                         })
-                        .setPositiveButton("LOGOUT", { dialog, _ ->
+                        .setPositiveButton(getString(R.string.menu_logout_exit), { dialog, _ ->
                             token = ""
                             Router().moveToLoginActivity(this)
                             dialog.dismiss()
