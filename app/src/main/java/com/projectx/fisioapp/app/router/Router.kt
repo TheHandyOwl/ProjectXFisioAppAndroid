@@ -11,20 +11,11 @@ import com.projectx.fisioapp.app.utils.RQ_OPERATION
 import com.projectx.fisioapp.domain.model.Catalog
 
 
-class Router {
-
-
-    fun navigateFromAppointmentsActivitytoLoginActivity (main: CalendarActivity) {
-        main.startActivity(Intent(main, LoginActivity::class.java))
-    }
-
-    fun navigateFromLoginActivitytoAppointmentsActivity (main: LoginActivity) {
-        main.startActivity(Intent(main, CalendarActivity::class.java))
-    }
+object Router {
 
     fun navigateFromCalendarActivityToAppointmentDetailActivity(main: CalendarActivity, appointment: Appointment){
         val intent = AppointmentDetailActivity.newInstance(main.baseContext, appointment)
-        main.startActivity(intent)
+        main.startActivityForResult(intent, RQ_OPERATION)
     }
 
     fun navigateFromCalendarActivityToLoginActivity(main: CalendarActivity) {
@@ -87,5 +78,13 @@ class Router {
         intent.putExtra(EXTRA_CATALOG_TYPE, type)
         mainActivity.startActivityForResult(intent, RQ_OPERATION)
     }
+
+    /*fun navigateFromAppointmentsActivitytoLoginActivity (main: CalendarActivity) {
+        main.startActivity(Intent(main, LoginActivity::class.java))
+    }
+
+    fun navigateFromLoginActivitytoAppointmentsActivity (main: LoginActivity) {
+        main.startActivity(Intent(main, CalendarActivity::class.java))
+    }*/
 
 }

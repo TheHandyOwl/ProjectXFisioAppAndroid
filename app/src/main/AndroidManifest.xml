@@ -65,7 +65,8 @@
         </activity>
         <activity
             android:name=".app.activity.UserDetailActivity"
-            android:label="@string/title_activity_user_details">
+            android:label="@string/title_activity_user_details"
+            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity android:name=".app.activity.ParentActivity" />
     </application>
