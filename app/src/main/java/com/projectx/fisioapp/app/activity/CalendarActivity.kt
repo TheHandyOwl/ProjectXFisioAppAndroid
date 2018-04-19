@@ -11,6 +11,7 @@ import com.projectx.fisioapp.app.fragment.AppointmentsListFragment
 import com.projectx.fisioapp.app.fragment.CalendarFragment
 import com.projectx.fisioapp.app.router.Router
 import com.projectx.fisioapp.app.utils.RQ_OPERATION
+import com.projectx.fisioapp.app.utils.formatDate
 import com.projectx.fisioapp.app.utils.toastIt
 import com.projectx.fisioapp.domain.interactor.ErrorCompletion
 import com.projectx.fisioapp.domain.interactor.SuccessCompletion
@@ -21,6 +22,9 @@ import com.projectx.fisioapp.domain.model.Appointments
 import kotlinx.android.synthetic.main.appointment_list.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.*
 
 class CalendarActivity : ParentActivity(),
         AppointmentsListFragment.OnSelectedAppointmentListener,
@@ -42,6 +46,13 @@ class CalendarActivity : ParentActivity(),
         title = getString(R.string.calendar_title)
 
         addBottomBar(this)
+
+        if(lastDate.isBlank()){
+
+            val date = Date()
+            lastDate = formatDate(date, true)
+            getAppointmentsForDate(this, lastDate)
+        }
 
     }
 
