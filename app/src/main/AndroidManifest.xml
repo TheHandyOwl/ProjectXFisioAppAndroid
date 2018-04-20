@@ -49,6 +49,10 @@
         <activity android:name=".app.activity.AppointmentDetailActivity">
         </activity>
         <activity android:name=".app.activity.CalendarActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".app.activity.CatalogListActivity">
@@ -63,10 +67,6 @@
             android:name=".app.activity.UserDetailActivity"
             android:label="@string/title_activity_user_details"
             android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".app.activity.ParentActivity" />
     </application>
