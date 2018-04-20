@@ -4,6 +4,7 @@ import java.io.Serializable
 import java.util.*
 
 class User(var id: String,
+        var img: String?,
         var name: String,
         var lastName: String?,
         var email: String,

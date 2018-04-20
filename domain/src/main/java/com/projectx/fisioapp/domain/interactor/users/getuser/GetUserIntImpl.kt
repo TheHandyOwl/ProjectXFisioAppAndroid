@@ -28,6 +28,7 @@ class GetUserIntImpl(context: Context) : GetUserInteractor {
     private fun entityMapper(userData: UserData): User {
         return User(
                 userData.id,
+                userData.img,
                 userData.name,
                 userData.lastName,
                 userData.email,

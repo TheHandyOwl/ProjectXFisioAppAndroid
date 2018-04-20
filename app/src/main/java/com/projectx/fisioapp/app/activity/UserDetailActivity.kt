@@ -1,9 +1,11 @@
 package com.projectx.fisioapp.app.activity
 
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.graphics.BitmapFactory
-import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.v4.content.ContextCompat
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory
 import android.util.Log
@@ -15,19 +17,24 @@ import com.projectx.fisioapp.app.utils.toastIt
 import com.projectx.fisioapp.domain.interactor.ErrorCompletion
 import com.projectx.fisioapp.domain.interactor.users.getuser.GetUserIntImpl
 import com.projectx.fisioapp.domain.interactor.users.getuser.GetUserInteractor
-import com.projectx.fisioapp.domain.interactor.users.updateuser.UpdateUserIntImpl
-import com.projectx.fisioapp.domain.interactor.users.updateuser.UpdateUserInteractor
+import com.projectx.fisioapp.domain.interactor.users.updateuserimage.UpdateUserImageIntImpl
+import com.projectx.fisioapp.domain.interactor.users.updateuserimage.UpdateUserImageInteractor
 import com.projectx.fisioapp.domain.model.User
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_user_detail.*
 import java.text.SimpleDateFormat
 import java.util.*
+import android.widget.Toast
+import java.io.File
 
-class UserDetailActivity : ParentActivity() {
+class UserDetailActivity : ParentActivity(), View.OnFocusChangeListener {
 
     private lateinit var user: User
     private var userWithChanges: User? = null
     private var calendar = Calendar.getInstance()
+
+    private var imageFilenameChanged: String? = null
+    private lateinit var imageFile: File
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +59,22 @@ class UserDetailActivity : ParentActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onFocusChange(v: View?, hasFocus: Boolean) {
+        when (v?.id) {
+            ivPhoto.id -> if(hasFocus) Log.d("App", "focus") else Log.d("App", "NO focus")
+            else -> Log.d("App", "ELSE")
+        }
+    }
+
     private fun setListeners() {
+
+        ivPhoto.setOnClickListener {
+            try {
+                selectImageInAlbum()
+            } catch (e: Exception) {
+                Log.d("App", "Error: ${e.localizedMessage}")
+            }
+        }
 
         btnSave.setOnClickListener {
             updateUser()
@@ -105,7 +127,7 @@ class UserDetailActivity : ParentActivity() {
                     uId,
                     success = {
                         user = it
-                        fillFileds(it)
+                        fillFields(it)
                     }, error = object : ErrorCompletion {
                         override fun errorCompletion(errorMessage: String) {
                             toastIt(baseContext, errorMessage)
@@ -131,6 +153,31 @@ class UserDetailActivity : ParentActivity() {
 
         userWithChanges = checkFields.first
 
+        val updateUserImage: UpdateUserImageInteractor = UpdateUserImageIntImpl(this)
+
+        try {
+            updateUserImage.execute(
+                    token,
+                    user.id,
+                    ivPhoto.drawable,
+                    success = { ok: Boolean, user: User, message: String ->
+                        if (ok) {
+                            toastIt(this, "Message: $message")
+                            //fillFields(user)
+                            toastIt(this, "Image updated")
+                        }
+                        else {
+                            toastIt(this, "There was an error uploading the image")
+                        }
+                    }, error = object : ErrorCompletion {
+                        override fun errorCompletion(errorMessage: String) {
+                            toastIt(baseContext, errorMessage)
+                        }
+                    })
+        } catch (e: Exception) {
+            toastIt(this, "Error: " + e.localizedMessage )
+        }
+        /*
         val updateUser: UpdateUserInteractor = UpdateUserIntImpl(this)
 
         try {
@@ -139,7 +186,7 @@ class UserDetailActivity : ParentActivity() {
                     userWithChanges as User,
                     success = { ok: Boolean, user: User ->
                         if (ok) {
-                            fillFileds(user)
+                            fillFields(user)
                             toastIt(this, "User updated")
                         }
                         else {
@@ -153,15 +200,17 @@ class UserDetailActivity : ParentActivity() {
         } catch (e: Exception) {
             toastIt(this, "Error: " + e.localizedMessage )
         }
+        */
     }
 
-    private fun fillBackgroundColorForFileds(fields: List<String>) {
+    private fun fillBackgroundColorForFields(fields: List<String>) {
 
-        val allFields : MutableList<View> = mutableListOf(lblName, lblLastName, lblLastName, lblEmail, lblAddress, lblPhone, lblBirthdate, lblNationalID, lblFellowshipNumber,lblRegistrationDate, lblLastLoginDate, lblProfessional, lblGender)
+        val allFields : MutableList<View> = mutableListOf(lblPhoto, lblName, lblLastName, lblLastName, lblEmail, lblAddress, lblPhone, lblBirthdate, lblNationalID, lblFellowshipNumber,lblRegistrationDate, lblLastLoginDate, lblProfessional, lblGender)
         allFields.map { it.background = ContextCompat.getDrawable(this, R.drawable.gradient_left_column_fields) }
 
         fields.map{
             when (it) {
+                "lblPhoto" -> lblPhoto.background = ContextCompat.getDrawable(this, R.drawable.gradient_left_column_fields_error)
                 "lblName" -> lblName.background = ContextCompat.getDrawable(this, R.drawable.gradient_left_column_fields_error)
                 "lblLastName" -> lblLastName.background = ContextCompat.getDrawable(this, R.drawable.gradient_left_column_fields_error)
                 "lblEmail" -> lblEmail.background = ContextCompat.getDrawable(this, R.drawable.gradient_left_column_fields_error)
@@ -177,14 +226,18 @@ class UserDetailActivity : ParentActivity() {
         }
     }
 
-
-    private fun fillFileds(user: User) {
-        Picasso.with(this)
-                .load("https://i.pinimg.com/originals/50/54/3a/50543adfc79f3209893aa528d35142ba.jpg")
+    private fun fillFields(user: User) {
+        user.img?.let {
+            imageFilenameChanged = it
+            Picasso.with(this)
+                //.load("https://i.pinimg.com/originals/50/54/3a/50543adfc79f3209893aa528d35142ba.jpg")
+                    // .load("http://192.168.1.41:3000/apiv1/images/users/$imageFilenameChanged")
+                    .load("http://192.168.1.41:3000/apiv1/images/users/$imageFilenameChanged")
                 .transform(CircleTransform())
                 .placeholder(R.drawable.no_image)
                 .error(android.R.drawable.ic_menu_report_image)
                 .into(ivPhoto)
+        }
         user.name?.let { etName.setText(it) }
         user.lastName?.let { etLastName.setText(it) }
         user.email?.let { etEmail.setText(it) }
@@ -222,12 +275,16 @@ class UserDetailActivity : ParentActivity() {
             fieldsWithErrors.add("lblGender")
         }
 
-        fillBackgroundColorForFileds(fieldsWithErrors)
+        fillBackgroundColorForFields(fieldsWithErrors)
 
         if (fieldsWithErrors.size != 0) return Pair(null, fieldsWithErrors)
 
+        // Test image upload
+        //imageFilenameChanged = "https://static.affinity-petcare.com/advance/cdn/farfuture/6-_63ZLwTwPDjBFAaZfOdXjOsdXua-pw3T_lgULbJkE/drupal-cache:p7c4h7/sites/default/files/img_gatitos_body.png"
+
         val user = User(
                 uId,
+                imageFilenameChanged,
                 etName.text.toString(),
                 etLastName.text.toString(),
                 etEmail.text.toString(),
@@ -266,6 +323,50 @@ class UserDetailActivity : ParentActivity() {
         }
         return null
 
+    }
+
+    fun selectImageInAlbum() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "image/*"
+        if (intent.resolveActivity(packageManager) != null) {
+            try {
+                startActivityForResult(intent, REQUEST_SELECT_IMAGE_IN_ALBUM)
+            } catch (e: Exception) {
+                Log.d("App", "Error: ${e.localizedMessage}")
+            }
+
+        }
+    }
+    fun takePhoto() {
+        val intent1 = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if (intent1.resolveActivity(packageManager) != null) {
+            startActivityForResult(intent1, REQUEST_TAKE_PHOTO)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+        when (requestCode) {
+            REQUEST_SELECT_IMAGE_IN_ALBUM -> {
+                if (resultCode === Activity.RESULT_OK) {
+                    Toast.makeText(this, "Picture taken!", Toast.LENGTH_SHORT).show()
+                    // by this point we have the camera photo on disk
+                    val uri = data.data
+                    uri.let {
+                        val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, it)
+                        bitmap.let { ivPhoto.setImageBitmap(it) }
+                    }
+                    imageFile = File(uri.toString())
+
+                } else { // Result was a failure
+                    Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    companion object {
+        private const val REQUEST_TAKE_PHOTO = 0
+        private const val REQUEST_SELECT_IMAGE_IN_ALBUM = 1
     }
 
 }

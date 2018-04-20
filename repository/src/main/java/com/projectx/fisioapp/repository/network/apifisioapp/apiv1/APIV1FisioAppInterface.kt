@@ -1,9 +1,12 @@
 package com.projectx.fisioapp.repository.network.apifisioapp.apiv1
 
+import android.graphics.Bitmap
 import com.projectx.fisioapp.repository.BuildConfig
 import com.projectx.fisioapp.repository.entitymodel.responses.UpdateAppointmentResponse
 import com.projectx.fisioapp.repository.entitymodel.responses.GetAppointmentsResponse
 import com.projectx.fisioapp.repository.entitymodel.responses.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 import java.util.*
@@ -38,6 +41,14 @@ internal interface APIV1FisioAppInterface {
                      @Field("phone") phone: String?,
                      @Field("birthDate") birthDate: Date?,
                      @Field("nationalId") nationalId: String?): Call<UpdateUserResponse>
+
+    @Multipart
+    @PUT(BuildConfig.FISIOAPP_UPLOADS_USER_IMAGE_SERVER_PATH + "/users" + "/{id}")
+    fun doUpdateUserImage(@Header("x-access-token") token: String,
+                          @Path("id") id: String,
+                          @Part body: MultipartBody.Part): Call<UpdateUserImageResponse>
+    //,
+    //@Part name: RequestBody
 
 
     /******** SERVICES OPERATIONS *********/
