@@ -13,6 +13,7 @@ import retrofit2.Response
 import okhttp3.RequestBody
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.util.Log
 import java.io.ByteArrayOutputStream
 
 
@@ -50,7 +51,9 @@ class UpdateUserImageIntImpl(): UpdateUserImageInteractor {
             }
 
             override fun onFailure(call: Call<UpdateUserImageResponse>?, t: Throwable?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                call?.cancel()
+                Log.d("App: ", t?.localizedMessage ?: "Connection to server not available")
+                error(t?.localizedMessage ?: "Conection to server not available")
             }
 
         })

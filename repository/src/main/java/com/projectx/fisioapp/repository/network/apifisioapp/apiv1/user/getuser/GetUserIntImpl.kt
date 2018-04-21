@@ -29,8 +29,8 @@ class GetUserIntImpl(): GetUserInteractor {
 
             }
 
-            override fun onFailure(call: Call<GetUserResponse>, t: Throwable?) {
-                call.cancel()
+            override fun onFailure(call: Call<GetUserResponse>?, t: Throwable?) {
+                call?.cancel()
                 Log.d("App: ", t?.localizedMessage ?: "Connection to server not available")
                 error(t?.localizedMessage ?: "Connection to server not available")
             }

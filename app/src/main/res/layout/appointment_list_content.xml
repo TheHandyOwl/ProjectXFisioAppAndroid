@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/appointment_list_content"
@@ -9,12 +10,12 @@
 
     <TextView
         android:id="@+id/appointment_list_id"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="@dimen/layout_margin_none"
+        android:layout_height="@dimen/layout_margin_none"
+        android:layout_marginBottom="@dimen/text_margin_half"
+        android:layout_marginEnd="@dimen/text_margin_half"
+        android:layout_marginStart="@dimen/text_margin_half"
+        android:layout_marginTop="@dimen/text_margin_half"
         android:textColor="@color/colorPrimaryDark"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,12 +26,12 @@
 
     <TextView
         android:id="@+id/appointment_list_content_field"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="@dimen/layout_margin_none"
+        android:layout_height="@dimen/layout_margin_none"
+        android:layout_marginBottom="@dimen/text_margin_half"
+        android:layout_marginEnd="@dimen/text_margin_half"
+        android:layout_marginStart="@dimen/text_margin_half"
+        android:layout_marginTop="@dimen/text_margin_half"
         android:gravity="center"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -21,7 +21,18 @@ android {
     }
 
     buildTypes {
+        debug {
+            // Server to photo profile with Picasso
+            buildConfigField "String", "HTTP_SERVER", "\"http://192.168.1.41:3000\""
+            // Files
+            buildConfigField "String", "FISIOAPP_USER_IMAGE_SERVER_PATH", "\"/apiv1/images/users\""
+        }
         release {
+            // Server to photo profile with Picasso
+            buildConfigField "String", "HTTP_SERVER", "\"http://192.168.1.41:3000\""
+            //Files
+            buildConfigField "String", "FISIOAPP_USER_IMAGE_SERVER_PATH", "\"/apiv1/images/users\""
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

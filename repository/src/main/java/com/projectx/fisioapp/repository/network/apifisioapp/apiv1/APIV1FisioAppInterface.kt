@@ -1,12 +1,10 @@
 package com.projectx.fisioapp.repository.network.apifisioapp.apiv1
 
-import android.graphics.Bitmap
 import com.projectx.fisioapp.repository.BuildConfig
 import com.projectx.fisioapp.repository.entitymodel.responses.UpdateAppointmentResponse
 import com.projectx.fisioapp.repository.entitymodel.responses.GetAppointmentsResponse
 import com.projectx.fisioapp.repository.entitymodel.responses.*
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 import java.util.*
