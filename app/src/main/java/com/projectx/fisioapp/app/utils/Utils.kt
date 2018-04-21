@@ -2,7 +2,6 @@ package com.projectx.fisioapp.app.utils
 
 import android.content.Context
 import android.util.Log
-import android.view.View.Z
 import android.widget.Toast
 import java.text.SimpleDateFormat
 import java.util.*

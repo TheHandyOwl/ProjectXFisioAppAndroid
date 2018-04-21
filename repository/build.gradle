@@ -26,7 +26,6 @@ android {
 
             // Server
             buildConfigField "String", "HTTP_SERVER", "\"http://192.168.1.41:3000\""
-            //buildConfigField "String", "HTTP_SERVER", "\"http://192.168.2.48:3000\""
 
             // Files
             buildConfigField "String", "FISIOAPP_APPOINTMENTS_PROFESSIONAL_SERVER_PATH", "\"/apiv1/appointments/professional\""

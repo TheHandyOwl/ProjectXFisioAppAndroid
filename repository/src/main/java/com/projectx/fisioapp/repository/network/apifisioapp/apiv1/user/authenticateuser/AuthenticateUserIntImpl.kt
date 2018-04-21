@@ -1,7 +1,6 @@
 package com.projectx.fisioapp.repository.network.apifisioapp.apiv1.user.authenticateuser
 
 import android.util.Log
-import com.google.gson.Gson
 import com.projectx.fisioapp.repository.entitymodel.responses.AuthenticateUserResponse
 import com.projectx.fisioapp.repository.entitymodel.user.UserData
 import com.projectx.fisioapp.repository.network.apifisioapp.apiv1.APIV1FisioAppClient
@@ -9,8 +8,7 @@ import com.projectx.fisioapp.repository.network.apifisioapp.apiv1.APIV1FisioAppI
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.BufferedReader
-import java.io.FileReader
+
 
 internal class AuthenticateUserIntImpl (): AuthenticateUserInteractor {
     override fun execute(email: String, password: String, success: (user: UserData, token: String) -> Unit, error: (errorMessage: String) -> Unit) {
@@ -32,8 +30,8 @@ internal class AuthenticateUserIntImpl (): AuthenticateUserInteractor {
                 }
             }
 
-            override fun onFailure(call: Call<AuthenticateUserResponse>, t: Throwable?) {
-                call.cancel()
+            override fun onFailure(call: Call<AuthenticateUserResponse>?, t: Throwable?) {
+                call?.cancel()
                 Log.d("App: ", t?.localizedMessage ?: "Connection to server not available")
                 error(t?.localizedMessage ?: "Conection to server not available")
             }

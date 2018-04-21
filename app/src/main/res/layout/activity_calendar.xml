@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,28 +14,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <fragment
+                android:id="@+id/calendar_fragment"
+                android:name="com.projectx.fisioapp.app.fragment.CalendarFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_marginBottom="@dimen/fragment_margin_little"
+                android:layout_weight="1" />
 
-                <fragment
-                    android:id="@+id/calendar_fragment"
-                    android:name="com.projectx.fisioapp.app.fragment.CalendarFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="0dp"
-                    android:layout_weight="1" />
+            <fragment
+                android:id="@+id/appointments_fragment"
+                android:name="com.projectx.fisioapp.app.fragment.AppointmentsListFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/fragment_margin_little"
+                android:layout_weight="1" />
 
-                <fragment
-                    android:id="@+id/appointments_fragment"
-                    android:name="com.projectx.fisioapp.app.fragment.AppointmentsListFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="0dp"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/relLayoutBotBar"

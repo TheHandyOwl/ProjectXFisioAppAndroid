@@ -29,8 +29,8 @@ internal class RegisterUserIntImpl (): RegisterUserInteractor {
                 success(ok, msg)
             }
 
-            override fun onFailure(call: Call<RegisterUserResponse>, t: Throwable?) {
-                call.cancel()
+            override fun onFailure(call: Call<RegisterUserResponse>?, t: Throwable?) {
+                call?.cancel()
                 Log.d("App: ", t?.localizedMessage ?: "Conection to server not available")
                 error(t?.localizedMessage ?: "Conection to server not available")
             }

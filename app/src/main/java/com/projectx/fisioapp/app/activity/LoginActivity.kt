@@ -1,18 +1,13 @@
 package com.projectx.fisioapp.app.activity
 
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
-import android.view.Menu
-import android.view.MenuItem
 import com.projectx.fisioapp.R
 import com.projectx.fisioapp.app.adapter.SectionsPagerAdapter
 import com.projectx.fisioapp.app.fragment.LoginFragment
 import com.projectx.fisioapp.app.fragment.RegisterFragment
-import com.projectx.fisioapp.app.helper.BottomNavigationViewHelper
-import com.projectx.fisioapp.app.router.Router
 import com.projectx.fisioapp.app.utils.toastIt
 import com.projectx.fisioapp.domain.interactor.ErrorCompletion
 import com.projectx.fisioapp.domain.interactor.users.authenticateuser.AuthenticateUserIntImpl
@@ -42,12 +37,6 @@ class LoginActivity : ParentActivity(),
 
         val tabLayout = findViewById<TabLayout>(R.id.tabs) as TabLayout
         tabLayout.setupWithViewPager(mViewPager)
-
-        // Tabs without icons. Title set at setupViewPager
-        /*
-        tabLayout.getTabAt(0)!!.setIcon(R.drawable.ic_tab_login)
-        tabLayout.getTabAt(1)!!.setIcon(R.drawable.ic_tab_register)
-        */
 
     }
 
