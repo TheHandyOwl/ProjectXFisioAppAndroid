@@ -1,5 +1,6 @@
 package com.projectx.fisioapp.repository.network.apifisioapp.apiv1.user.authenticateuser
 
+import android.util.Log
 import com.projectx.fisioapp.repository.entitymodel.responses.AuthenticateUserResponse
 import com.projectx.fisioapp.repository.entitymodel.user.UserData
 import com.projectx.fisioapp.repository.network.apifisioapp.apiv1.APIV1FisioAppClient
@@ -7,6 +8,7 @@ import com.projectx.fisioapp.repository.network.apifisioapp.apiv1.APIV1FisioAppI
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 internal class AuthenticateUserIntImpl (): AuthenticateUserInteractor {
     override fun execute(email: String, password: String, success: (user: UserData, token: String) -> Unit, error: (errorMessage: String) -> Unit) {
@@ -20,14 +22,17 @@ internal class AuthenticateUserIntImpl (): AuthenticateUserInteractor {
         val callGetToken = apiInterfaceLocalhost.doGetToken(email, password)
         callGetToken.enqueue(object : Callback<AuthenticateUserResponse> {
             override fun onResponse(call: Call<AuthenticateUserResponse>, response: Response<AuthenticateUserResponse>) {
-                val responseObject = response.body()
-                val user = responseObject?.result as UserData
-                val token = responseObject?.token as String
-                success(user, token)
+                response.body().let {
+                    val backResponse = response.body()
+                    val user = backResponse?.result?.user as UserData
+                    val token = backResponse?.result?.token as String
+                    backResponse.let { success(user, token ) }
+                }
             }
 
-            override fun onFailure(call: Call<AuthenticateUserResponse>, t: Throwable?) {
-                call.cancel()
+            override fun onFailure(call: Call<AuthenticateUserResponse>?, t: Throwable?) {
+                call?.cancel()
+                Log.d("App: ", t?.localizedMessage ?: "Connection to server not available")
                 error(t?.localizedMessage ?: "Conection to server not available")
             }
 

@@ -6,16 +6,17 @@ import java.util.*
 
 class UserData (
         @SerializedName("_id") var id: String,
+        @Expose var img: String?,
         @Expose var name: String,
-        @Expose var lastName: String,
+        @Expose var lastName: String?,
         @Expose var email: String,
-        @Expose var isProfessional: Boolean,
-        @Expose var fellowshipNumber: String,
-        @Expose var gender: String,
-        @Expose var address: String,
-        @Expose var phone: String,
-        @Expose var birthDate: Date,
-        @Expose var nationalId: String,
-        @Expose var registrationDate: Date,
-        @Expose var lastLoginDate: Date
+        @Expose var isProfessional: Boolean?,
+        @Expose var fellowshipNumber: String?,
+        @Expose var gender: String?,
+        @Expose var address: String?,
+        @Expose var phone: String?,
+        @Expose var birthDate: Date?,
+        @Expose var nationalId: String?,
+        @Expose var registrationDate: Date?,
+        @Expose var lastLoginDate: Date?
 )

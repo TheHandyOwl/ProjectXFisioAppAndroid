@@ -1,5 +1,6 @@
 package com.projectx.fisioapp.repository
 
+import android.graphics.drawable.Drawable
 import com.projectx.fisioapp.repository.entitymodel.appointments.AppoinmentData
 import com.projectx.fisioapp.repository.entitymodel.catalog.CatalogData
 import com.projectx.fisioapp.repository.entitymodel.user.UserData
@@ -16,6 +17,8 @@ interface RepositoryInteractor {
                      success: (ok: Boolean, msg: String) -> Unit, error: (errorMessage: String) -> Unit)
     fun updateUser(token: String, user: UserData,
                    success: (ok: Boolean, user: UserData) -> Unit, error: (errorMessage: String) -> Unit)
+    fun updateUserImage(token: String, id: String, image: Drawable,
+                        success: (ok: Boolean, user: UserData, message: String) -> Unit, error: (errorMessage: String) -> Unit)
 
 
     /******** catalog (products and services) ********/

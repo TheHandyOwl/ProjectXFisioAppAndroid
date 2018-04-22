@@ -1,6 +1,5 @@
 package com.projectx.fisioapp.app.activity
 
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -22,8 +21,6 @@ import com.projectx.fisioapp.domain.model.Appointments
 import kotlinx.android.synthetic.main.appointment_list.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
-import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.*
 
 class CalendarActivity : ParentActivity(),
