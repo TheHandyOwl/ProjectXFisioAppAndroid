@@ -2,6 +2,7 @@ package com.projectx.fisioapp.app.activity
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -54,24 +55,29 @@ open class ParentActivity : AppCompatActivity() {
         return uId.length !== 0
     }
 
+    fun finalizeActivity(result: Int, intent: Intent) {
+        setResult(result, intent)
+        finish()
+    }
+
     fun checkOptionSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
             R.id.user_details -> {
-                Router().moveToAboutMeActivity(this)
+                Router.moveToAboutMeActivity(this)
             }
             R.id.about_us -> {
-                Router().moveToAboutUsActivity(this)
+                Router.moveToAboutUsActivity(this)
             }
             R.id.logout -> {
                 AlertDialog.Builder(this)
                         .setTitle(getString(R.string.logout))
                         .setMessage(getString(R.string.menu_exit_message))
-                        .setNegativeButton("CANCEL", { dialog, _ ->
+                        .setNegativeButton(getString(R.string.menu_logout_cancel), { dialog, _ ->
                             dialog.dismiss()
                         })
-                        .setPositiveButton("LOGOUT", { dialog, _ ->
+                        .setPositiveButton(getString(R.string.menu_logout_exit), { dialog, _ ->
                             token = ""
-                            Router().moveToLoginActivity(this)
+                            Router.moveToLoginActivity(this)
                             dialog.dismiss()
                         })
                         .show()
@@ -92,13 +98,13 @@ open class ParentActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.ic_menu_calendar -> {
-                    Router().moveToCalendarActivity(main)
+                    Router.moveToCalendarActivity(main)
                 }
                 R.id.ic_menu_products -> {
-                    Router().moveToProductsActivity(main)
+                    Router.moveToProductsActivity(main)
                 }
                 R.id.ic_menu_services -> {
-                    Router().moveToServicesActivity(main)
+                    Router.moveToServicesActivity(main)
                 }
             }
 

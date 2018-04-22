@@ -43,15 +43,18 @@ class LoginActivity : ParentActivity(),
         val tabLayout = findViewById<TabLayout>(R.id.tabs) as TabLayout
         tabLayout.setupWithViewPager(mViewPager)
 
+        // Tabs without icons. Title set at setupViewPager
+        /*
         tabLayout.getTabAt(0)!!.setIcon(R.drawable.ic_tab_login)
         tabLayout.getTabAt(1)!!.setIcon(R.drawable.ic_tab_register)
+        */
 
     }
 
     private fun setupViewPager(viewPager: ViewPager?) {
         val adapter = SectionsPagerAdapter(supportFragmentManager)
-        adapter.addFragment(LoginFragment() as Fragment)
-        adapter.addFragment(RegisterFragment() as Fragment)
+        adapter.addFragment(LoginFragment() as Fragment, getString(R.string.fragment_title_login))
+        adapter.addFragment(RegisterFragment() as Fragment, getString(R.string.fragment_title_register))
         viewPager?.adapter = adapter
     }
 

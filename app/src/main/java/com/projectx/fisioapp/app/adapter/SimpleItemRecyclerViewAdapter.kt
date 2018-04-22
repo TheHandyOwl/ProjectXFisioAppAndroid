@@ -36,7 +36,7 @@ class SimpleItemRecyclerViewAdapter(private val mParentActivity: CatalogListActi
                         .replace(R.id.catalog_detail_container, fragment)
                         .commit()
             } else {
-                Router().navigateFromParentActivityToDetailCatalogActivity(item, mParentActivity, mParentActivity.type)
+                Router.navigateFromParentActivityToDetailCatalogActivity(item, mParentActivity, mParentActivity.type)
             }
         }
     }
