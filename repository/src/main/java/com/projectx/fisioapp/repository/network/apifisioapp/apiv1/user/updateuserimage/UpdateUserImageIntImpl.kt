@@ -17,7 +17,7 @@ import android.util.Log
 import java.io.ByteArrayOutputStream
 
 
-class UpdateUserImageIntImpl(): UpdateUserImageInteractor {
+class UpdateUserImageIntImpl : UpdateUserImageInteractor {
     override fun execute(token: String, id: String, image: Drawable, success: (ok: Boolean, user: UserData, message: String) -> Unit, error: (errorMessage: String) -> Unit) {
 
         val apiInterfaceLocalhost: APIV1FisioAppInterface =

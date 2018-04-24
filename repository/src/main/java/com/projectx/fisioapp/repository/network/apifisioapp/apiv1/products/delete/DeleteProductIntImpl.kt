@@ -10,7 +10,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-internal class DeleteProductIntImpl(): DeleteProductInteractor {
+internal class DeleteProductIntImpl : DeleteProductInteractor {
     override fun execute(token: String, id: String, success: (successMessage: String) -> Unit, error: (errorMessage: String) -> Unit) {
 
         val apiInterfaceLocalhost: APIV1FisioAppInterface =

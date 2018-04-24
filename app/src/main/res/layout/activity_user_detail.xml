@@ -365,7 +365,8 @@
                 app:layout_constraintEnd_toEndOf="@+id/etFellowshipNumber"
                 app:layout_constraintStart_toStartOf="@+id/etFellowshipNumber"
                 app:layout_constraintTop_toTopOf="@+id/lblRegistrationDate"
-                tools:text="1/1/2018" />
+                tools:text="1/1/2018"
+                tools:ignore="TextFields" />
 
             <TextView
                 android:id="@+id/lblLastLoginDate"
@@ -399,7 +400,8 @@
                 app:layout_constraintEnd_toEndOf="@+id/etRegistrationDate"
                 app:layout_constraintStart_toStartOf="@+id/etRegistrationDate"
                 app:layout_constraintTop_toTopOf="@+id/lblLastLoginDate"
-                tools:text="1/4/2018" />
+                tools:text="1/4/2018"
+                tools:ignore="TextFields" />
 
             <TextView
                 android:id="@+id/lblProfessional"
