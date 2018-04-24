@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_appointment_detail.*
 class AppointmentDetailFragment : Fragment() {
 
     companion object {
-        private val EXTRA_APPOINTMENT = "EXTRA_APPOINTMENT"
+        private const val EXTRA_APPOINTMENT = "EXTRA_APPOINTMENT"
 
         fun newInstance(appointment: Appointment): AppointmentDetailFragment{
             val fragment = AppointmentDetailFragment()

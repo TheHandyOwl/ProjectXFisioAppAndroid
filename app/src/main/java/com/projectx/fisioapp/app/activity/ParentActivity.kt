@@ -88,7 +88,7 @@ open class ParentActivity : AppCompatActivity() {
 
 
     protected fun addBottomBar(main: Activity){
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavView_bar) as BottomNavigationView
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavView_bar)
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView)
 
         val menu = bottomNavigationView.menu

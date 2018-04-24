@@ -1,5 +1,6 @@
 package com.projectx.fisioapp.app.activity
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -295,18 +296,21 @@ class UserDetailActivity : ParentActivity() {
         return Pair(user, null)
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun updateBirthdateInView() {
         val myFormat = "dd/MM/yyyy" // Choose the format you need
         val sdf = SimpleDateFormat(myFormat)
-        etBirthdate.setText(sdf.format(calendar.getTime()))
+        etBirthdate.setText(sdf.format(calendar.time))
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun formatDateToString(date: Date): String{
         val format = SimpleDateFormat("dd/MM/yyyy")
         val d = format.format(date)
         return d
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun formatStringToDate(date: String): Date? {
         try {
             val sdf = SimpleDateFormat("dd/MM/yyyy")

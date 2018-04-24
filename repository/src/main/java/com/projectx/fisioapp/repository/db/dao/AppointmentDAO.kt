@@ -191,7 +191,7 @@ class AppointmentDAO(dbHelper: DBHelper) : DAOPersistable<AppoinmentData> {
 
     private fun getDate(date: Date): String {
         val format = SimpleDateFormat(DBAppointmentConstants.FORMAT_DATE)
-        return format.format(date);
+        return format.format(date)
     }
 
 }

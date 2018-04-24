@@ -20,7 +20,7 @@ class LoginFragment : Fragment() {
     private var pass: EditText? = null
 
     companion object {
-        private val TAG = "LoginFragment"
+        private const val TAG = "LoginFragment"
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -46,8 +46,8 @@ class LoginFragment : Fragment() {
     }
 
     private fun setFakeDataInForm() {
-        email?.setText( "fisio@invalid.com")
-        pass?.setText("12345678")
+        email?.setText( getString(R.string.fake_login_user_default))
+        pass?.setText(getString(R.string.fake_login_password_default))
     }
 
     override fun onAttach(context: Context?) {

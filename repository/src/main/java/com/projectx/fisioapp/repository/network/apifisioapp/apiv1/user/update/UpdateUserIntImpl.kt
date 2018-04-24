@@ -11,7 +11,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class UpdateUserIntImpl() : UpdateUserInteractor {
+class UpdateUserIntImpl : UpdateUserInteractor {
     override fun execute(token: String, user: UserData, success: (ok: Boolean, user: UserData) -> Unit, error: (errorMessage: String) -> Unit) {
 
         val apiInterfaceLocalhost: APIV1FisioAppInterface =
