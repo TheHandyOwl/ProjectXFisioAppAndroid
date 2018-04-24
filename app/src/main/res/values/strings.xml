@@ -39,7 +39,9 @@
     <string name="form_user_details_gender">Gender</string>
     <string name="form_user_details_female">Female</string>
     <string name="form_user_details_male">Male</string>
-    <string name="user_image_description">User image</string>
+    <string name="form_user_detail_photo">Photo</string>
+    <string name="form_user_detail_profile_photo">Profile photo</string>
+    <string name="form_user_detail_background_description">Image background</string>
     <string name="map_image_desc">map image description</string>
     <string name="log_in">Log In</string>
     <string name="about_me">About Me</string>
