@@ -35,13 +35,15 @@
         android:layout_marginEnd="@dimen/layout_margin_half"
         android:layout_marginStart="@dimen/layout_margin_half"
         android:layout_marginTop="@dimen/layout_margin_half"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline10"
+        tools:paddingLeft="@dimen/form_cell_padding"
         tools:text="My name" />
 
     <TextView
@@ -54,6 +56,7 @@
         android:layout_marginTop="@dimen/layout_margin_half"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline11"
