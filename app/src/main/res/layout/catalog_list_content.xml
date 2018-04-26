@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
     android:layout_marginEnd="8dp"
     android:layout_marginStart="8dp"
@@ -29,38 +29,31 @@
 
     <TextView
         android:id="@+id/catalog_list_element_name"
-        android:layout_width="@dimen/layout_margin_none"
-        android:layout_height="@dimen/layout_margin_none"
-        android:layout_marginBottom="@dimen/layout_margin_half"
-        android:layout_marginEnd="@dimen/layout_margin_half"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/layout_margin_half"
         android:layout_marginTop="@dimen/layout_margin_half"
         android:textAlignment="textStart"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline10"
-        tools:paddingLeft="@dimen/form_cell_padding"
         tools:text="My name" />
 
     <TextView
         android:id="@+id/catalog_list_element_price"
-        android:layout_width="@dimen/layout_margin_none"
-        android:layout_height="@dimen/layout_margin_none"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/layout_margin_half"
         android:layout_marginEnd="@dimen/layout_margin_half"
-        android:layout_marginStart="@dimen/layout_margin_half"
         android:layout_marginTop="@dimen/layout_margin_half"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline11"
-        app:layout_constraintTop_toTopOf="@+id/guideline10"
+        app:layout_constraintTop_toBottomOf="@+id/catalog_list_element_name"
         tools:text="50 €" />
 
     <android.support.constraint.Guideline
@@ -69,12 +62,5 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.77" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75" />
 
 </android.support.constraint.ConstraintLayout>
