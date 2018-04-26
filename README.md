@@ -31,8 +31,7 @@ tuCarpeta/app/src/main/res/value/google_maps_api_key.xml
 
 Puedes ver un ejemplo para el fichero `google_maps_api_key.xml` aqui:
 
-```
-xml
+``` xml
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <string name="GOOGLE_MAPS_API_KEY">YourAPIKeyHere</string>
