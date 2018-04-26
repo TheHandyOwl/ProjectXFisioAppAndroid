@@ -120,7 +120,7 @@ class CatalogListActivity : ParentActivity() {
 
         recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, list, mTwoPane)
         // set two columns with the elements
-        recyclerView.layoutManager = GridLayoutManager(this, 1)
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
     }
 
     private fun getCatalogList(context: Context, forceUpdate: Boolean) {
