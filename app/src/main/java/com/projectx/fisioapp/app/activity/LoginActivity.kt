@@ -24,7 +24,7 @@ class LoginActivity : ParentActivity(),
     private var mViewPager: ViewPager? = null
 
     companion object {
-        private val TAG = "LoginActivity"
+        private const val TAG = "LoginActivity"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +35,7 @@ class LoginActivity : ParentActivity(),
         mViewPager = container as ViewPager
         setupViewPager(mViewPager)
 
-        val tabLayout = findViewById<TabLayout>(R.id.tabs) as TabLayout
+        val tabLayout = findViewById<TabLayout>(R.id.tabs)
         tabLayout.setupWithViewPager(mViewPager)
 
     }

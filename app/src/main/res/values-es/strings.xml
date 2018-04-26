@@ -56,8 +56,8 @@
     <string name="is_confirmed">Confirmada</string>
     <string name="is_cancelled">Cancelada</string>
     <string name="observations">Observaciones:</string>
-    <string name="save_bttn">GUARDAR</string>
-    <string name="cancel_bttn">CANCELAR</string>
+    <string name="save_btn">GUARDAR</string>
+    <string name="cancel_btn">CANCELAR</string>
     <string name="catalog_name">Nombre</string>
     <string name="catalog_desc">Descripción</string>
     <string name="catalog_price">Precio</string>

@@ -10,7 +10,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-internal class AuthenticateUserIntImpl (): AuthenticateUserInteractor {
+internal class AuthenticateUserIntImpl : AuthenticateUserInteractor {
     override fun execute(email: String, password: String, success: (user: UserData, token: String) -> Unit, error: (errorMessage: String) -> Unit) {
 
         val apiInterfaceLocalhost: APIV1FisioAppInterface =

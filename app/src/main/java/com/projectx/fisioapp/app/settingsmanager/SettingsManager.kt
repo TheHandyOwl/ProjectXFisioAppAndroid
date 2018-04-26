@@ -7,11 +7,7 @@ import com.projectx.fisioapp.app.sharedpreferenceswrapper.SharedPreferencesWrapp
 import com.projectx.fisioapp.app.sharedpreferenceswrapper.SharedPreferencesWrapper.set
 
 class SettingsManager {
-    var sharedPreferencesWrapper: SharedPreferencesWrapper
-
-    init {
-        sharedPreferencesWrapper = SharedPreferencesWrapper
-    }
+    var sharedPreferencesWrapper: SharedPreferencesWrapper = SharedPreferencesWrapper
 
     // Fields
     val KEY_UID = "UID"

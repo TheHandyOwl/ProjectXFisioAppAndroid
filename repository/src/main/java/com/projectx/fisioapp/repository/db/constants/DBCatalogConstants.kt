@@ -3,17 +3,17 @@ package com.projectx.fisioapp.repository.db.constants
 
 object DBCatalogConstants {
 
-    val TABLE_CATALOG = "CATALOG"
+    const val TABLE_CATALOG = "CATALOG"
 
     // Table field constants
-    val KEY_ENTITY_DATABASE_ID = "_id"
-    val KEY_ENTITY_NAME = "NAME"
-    val KEY_ENTITY_DESCRIPTION = "DESCRIPTION"
-    val KEY_ENTITY_PRICE = "PRICE"
-    val KEY_ENTITY_IS_ACTIVE = "IS_ACTIVE"
-    val KEY_ENTITY_PROFESSIONAL_ID = "PROFESSIONAL_ID"
+    const val KEY_ENTITY_DATABASE_ID = "_id"
+    const val KEY_ENTITY_NAME = "NAME"
+    const val KEY_ENTITY_DESCRIPTION = "DESCRIPTION"
+    const val KEY_ENTITY_PRICE = "PRICE"
+    const val KEY_ENTITY_IS_ACTIVE = "IS_ACTIVE"
+    const val KEY_ENTITY_PROFESSIONAL_ID = "PROFESSIONAL_ID"
     //val KEY_ENTITY_IMAGE_URL = "IMAGE_URL"
-    val KEY_ENTITY_TYPE = "TYPE"
+    const val KEY_ENTITY_TYPE = "TYPE"
 
     val ALL_COLUMNS = arrayOf(
             KEY_ENTITY_DATABASE_ID,

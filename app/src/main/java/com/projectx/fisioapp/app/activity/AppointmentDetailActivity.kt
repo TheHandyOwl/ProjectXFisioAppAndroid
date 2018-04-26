@@ -21,7 +21,7 @@ import kotlinx.coroutines.experimental.async
 class AppointmentDetailActivity : ParentActivity(), AppointmentDetailListener {
 
     companion object {
-        private val EXTRA_APPOINTMENT = "EXTRA_APPOINTMENT"
+        private const val EXTRA_APPOINTMENT = "EXTRA_APPOINTMENT"
 
         fun newInstance(context: Context, appointment: Appointment): Intent {
             val intent = Intent(context, AppointmentDetailActivity::class.java)
