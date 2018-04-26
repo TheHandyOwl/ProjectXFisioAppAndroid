@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Default / all languages -->
+    <string name="fake_login_user_default">fisio@invalid.com</string>
+    <string name="fake_login_password_default">12345678</string>
+    <string name="fake_register_name_default">anotherFisio</string>
+    <string name="fake_register_user_default">anotherfisio@invalid.com</string>
+    <string name="fake_register_password_default">12345678</string>
+
+    <!-- English language -->
     <string name="app_name">FisioApp</string>
     <string name="authenticate">Authenticate</string>
     <string name="button_register">Register</string>
@@ -39,7 +47,9 @@
     <string name="form_user_details_gender">Gender</string>
     <string name="form_user_details_female">Female</string>
     <string name="form_user_details_male">Male</string>
-    <string name="user_image_description">User image</string>
+    <string name="form_user_detail_photo">Photo</string>
+    <string name="form_user_detail_profile_photo">Profile photo</string>
+    <string name="form_user_detail_background_description">Image background</string>
     <string name="map_image_desc">map image description</string>
     <string name="log_in">Log In</string>
     <string name="about_me">About Me</string>
@@ -54,8 +64,8 @@
     <string name="is_confirmed">Confirmed</string>
     <string name="is_cancelled">Cancelled</string>
     <string name="observations">Observations:</string>
-    <string name="save_bttn">SAVE</string>
-    <string name="cancel_bttn">CANCEL</string>
+    <string name="save_btn">SAVE</string>
+    <string name="cancel_btn" tools:ignore="ButtonCase">CANCEL</string>
     <string name="catalog_name">Name</string>
     <string name="catalog_desc">Description</string>
     <string name="catalog_price">Price</string>
@@ -68,7 +78,7 @@
     <string name="catalog_update">Update</string>
     <string name="logout">Logout</string>
     <string name="menu_exit_message">Do you want to exit now?</string>
-    <string name="menu_logout_cancel">CANCEL</string>
+    <string name="menu_logout_cancel" tools:ignore="ButtonCase">CANCEL</string>
     <string name="menu_logout_exit">LOGOUT</string>
     <string name="fragment_title_login">LOGIN</string>
     <string name="fragment_title_register">REGISTER</string>

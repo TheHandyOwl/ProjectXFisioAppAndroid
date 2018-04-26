@@ -9,7 +9,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-internal class UpdateAppointmentIntImpl(): UpdateAppointmentInteractor {
+internal class UpdateAppointmentIntImpl : UpdateAppointmentInteractor {
     override fun execute(token: String, id: String, isConfirmed: Boolean, isCancelled: Boolean, success: (result: Boolean) -> Unit, error: (errorMessage: String) -> Unit) {
 
         val apiInterfaceLocalhost: APIV1FisioAppInterface =

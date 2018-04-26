@@ -10,25 +10,40 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/text_margin_normal"
-        android:layout_marginStart="@dimen/text_margin_normal"
-        android:layout_marginTop="@dimen/text_margin_normal"
+        android:layout_width="@dimen/layout_margin_none"
+        android:layout_height="@dimen/layout_margin_none"
+        android:layout_marginBottom="@dimen/text_margin_half"
+        android:layout_marginEnd="@dimen/text_margin_half"
+        android:layout_marginStart="@dimen/text_margin_half"
+        android:layout_marginTop="@dimen/text_margin_half"
         android:text="@string/the_team"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_title_super"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/layout_margin_none"
+        android:layout_height="@dimen/layout_margin_none"
+        android:layout_marginBottom="@dimen/text_margin_half"
+        android:layout_marginEnd="@dimen/text_margin_half"
         android:layout_marginStart="@dimen/text_margin_half"
-        android:layout_marginTop="@dimen/text_margin_normal"
+        android:layout_marginTop="@dimen/text_margin_half"
         android:text="@string/the_team_members"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline7" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
 
 </android.support.constraint.ConstraintLayout>

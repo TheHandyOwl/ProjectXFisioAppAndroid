@@ -11,7 +11,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-internal class RegisterUserIntImpl (): RegisterUserInteractor {
+internal class RegisterUserIntImpl : RegisterUserInteractor {
     override fun execute(name: String, email: String, password: String, success: (ok: Boolean, msg: String) -> Unit, error: (errorMessage: String) -> Unit) {
 
         val apiInterfaceLocalhost: APIV1FisioAppInterface =
@@ -29,8 +29,8 @@ internal class RegisterUserIntImpl (): RegisterUserInteractor {
                 success(ok, msg)
             }
 
-            override fun onFailure(call: Call<RegisterUserResponse>, t: Throwable?) {
-                call.cancel()
+            override fun onFailure(call: Call<RegisterUserResponse>?, t: Throwable?) {
+                call?.cancel()
                 Log.d("App: ", t?.localizedMessage ?: "Conection to server not available")
                 error(t?.localizedMessage ?: "Conection to server not available")
             }

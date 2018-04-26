@@ -1,5 +1,6 @@
 package com.projectx.fisioapp.repository.network.apifisioapp.apiv1.user.update
 
+import android.util.Log
 import com.projectx.fisioapp.repository.entitymodel.responses.UpdateUserResponse
 import com.projectx.fisioapp.repository.entitymodel.user.UserData
 import com.projectx.fisioapp.repository.network.apifisioapp.apiv1.APIV1FisioAppClient
@@ -10,7 +11,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class UpdateUserIntImpl() : UpdateUserInteractor {
+class UpdateUserIntImpl : UpdateUserInteractor {
     override fun execute(token: String, user: UserData, success: (ok: Boolean, user: UserData) -> Unit, error: (errorMessage: String) -> Unit) {
 
         val apiInterfaceLocalhost: APIV1FisioAppInterface =
@@ -32,7 +33,9 @@ class UpdateUserIntImpl() : UpdateUserInteractor {
             }
 
             override fun onFailure(call: Call<UpdateUserResponse>?, t: Throwable?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                call?.cancel()
+                Log.d("App: ", t?.localizedMessage ?: "Connection to server not available")
+                error(t?.localizedMessage ?: "Conection to server not available")
             }
 
         })

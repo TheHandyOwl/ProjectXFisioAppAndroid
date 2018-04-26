@@ -2,22 +2,22 @@ package com.projectx.fisioapp.repository.db.constants
 
 object DBAppointmentConstants {
 
-    val TABLE_APPOINTMENT = "APPOINTMENT"
+    const val TABLE_APPOINTMENT = "APPOINTMENT"
 
     // Table field constants
-    val KEY_DATABASE_ID = "_id"
-    val KEY_SERVICE_ID = "SERVICE_ID"
-    val KEY_SERVICE_PRICE = "SERVICE_PRICE"
-    val KEY_CUSTOMER_ID = "CUSTOMER_ID"
-    val KEY_CUSTOMER_NAME = "CUSTOMER_NAME"
-    val KEY_ADDRESS = "APPOINTMENT_ADDRESS"
-    val KEY_PROFESSIONAL_ID = "PROFESSIONAL_ID"
-    val KEY_IS_CONFIRMED = "IS_CONFIRMED"
-    val KEY_IS_CANCELLED = "IS_CANCELLED"
-    val KEY_DATE = "DATE"
-    val KEY_LATITUDE = "LATITUDE"
-    val KEY_LONGITUDE = "LONGITUDE"
-    val KEY_EXTRA_INFO = "EXTRA_INFO"
+    const val KEY_DATABASE_ID = "_id"
+    const val KEY_SERVICE_ID = "SERVICE_ID"
+    const val KEY_SERVICE_PRICE = "SERVICE_PRICE"
+    const val KEY_CUSTOMER_ID = "CUSTOMER_ID"
+    const val KEY_CUSTOMER_NAME = "CUSTOMER_NAME"
+    const val KEY_ADDRESS = "APPOINTMENT_ADDRESS"
+    const val KEY_PROFESSIONAL_ID = "PROFESSIONAL_ID"
+    const val KEY_IS_CONFIRMED = "IS_CONFIRMED"
+    const val KEY_IS_CANCELLED = "IS_CANCELLED"
+    const val KEY_DATE = "DATE"
+    const val KEY_LATITUDE = "LATITUDE"
+    const val KEY_LONGITUDE = "LONGITUDE"
+    const val KEY_EXTRA_INFO = "EXTRA_INFO"
 
     val ALL_COLUMNS = arrayOf(
             KEY_DATABASE_ID,
@@ -58,5 +58,5 @@ object DBAppointmentConstants {
 
     val CREATE_DATABASE_SCRIPTS = arrayOf(SQL_SCRIPT_CREATE_APPOINTMENT_TABLE)
 
-    val FORMAT_DATE = "yyyy-MM-dd hh:mm"
+    const val FORMAT_DATE = "yyyy-MM-dd hh:mm"
 }

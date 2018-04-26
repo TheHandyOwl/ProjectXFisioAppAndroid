@@ -3,8 +3,6 @@ package com.projectx.fisioapp.domain.interactor.appointments
 import android.content.Context
 import com.projectx.fisioapp.domain.interactor.ErrorCompletion
 import com.projectx.fisioapp.domain.interactor.SuccessCompletion
-import com.projectx.fisioapp.domain.model.Appointment
-import com.projectx.fisioapp.domain.model.util.AppointmentMapper
 import com.projectx.fisioapp.repository.RepositoryIntImpl
 import com.projectx.fisioapp.repository.RepositoryInteractor
 import java.lang.ref.WeakReference

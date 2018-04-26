@@ -39,7 +39,9 @@
     <string name="form_user_details_gender">Género</string>
     <string name="form_user_details_female">Femenino</string>
     <string name="form_user_details_male">Masculino</string>
-    <string name="user_image_description">Imagen de usuario</string>
+    <string name="form_user_detail_photo">Foto</string>
+    <string name="form_user_detail_profile_photo">Foto de perfil</string>
+    <string name="form_user_detail_background_description">Imagen de fondo</string>
     <string name="map_image_desc">descripcion imagen del mapa</string>
     <string name="log_in">Log In</string>
     <string name="about_me">Sobre mí</string>
@@ -54,8 +56,8 @@
     <string name="is_confirmed">Confirmada</string>
     <string name="is_cancelled">Cancelada</string>
     <string name="observations">Observaciones:</string>
-    <string name="save_bttn">GUARDAR</string>
-    <string name="cancel_bttn">CANCELAR</string>
+    <string name="save_btn">GUARDAR</string>
+    <string name="cancel_btn">CANCELAR</string>
     <string name="catalog_name">Nombre</string>
     <string name="catalog_desc">Descripción</string>
     <string name="catalog_price">Precio</string>

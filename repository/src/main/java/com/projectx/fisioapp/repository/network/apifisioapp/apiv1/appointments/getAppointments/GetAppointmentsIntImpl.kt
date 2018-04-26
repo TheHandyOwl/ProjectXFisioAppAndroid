@@ -10,7 +10,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-internal class GetAppointmentsIntImpl (): GetAppointmentsInteractor {
+internal class GetAppointmentsIntImpl : GetAppointmentsInteractor {
     override fun execute(token: String, success: (appointmentsList: List<AppoinmentData>) -> Unit, error: (errorMessage: String) -> Unit) {
 
         val apiInterfaceLocalhost: APIV1FisioAppInterface =

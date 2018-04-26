@@ -13,7 +13,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-internal class GetProductsIntImpl(): GetProductsInteractor {
+internal class GetProductsIntImpl : GetProductsInteractor {
     override fun execute(token: String, success: (catalogItems: List<CatalogData>) -> Unit, error: (errorMessage: String) -> Unit) {
 
         val apiInterfaceLocalhost: APIV1FisioAppInterface =

@@ -4,11 +4,14 @@ import com.google.gson.annotations.Expose
 import com.projectx.fisioapp.repository.entitymodel.user.UserData
 
 
-class AuthenticateUserResponse (
-        @Expose
-        var ok: Boolean?,
-        @Expose
-        var result: UserData?,
-        @Expose
-        var token: String?
-)
+class AuthenticateUserResponse{
+        @Expose var ok: Boolean? = null
+        @Expose var result: Result? = null
+
+        inner class Result {
+                @Expose
+                var user: UserData? = null
+                @Expose
+                var token: String? = null
+        }
+}

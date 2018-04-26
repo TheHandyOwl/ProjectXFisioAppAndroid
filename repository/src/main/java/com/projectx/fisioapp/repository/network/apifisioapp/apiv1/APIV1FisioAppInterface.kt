@@ -4,6 +4,7 @@ import com.projectx.fisioapp.repository.BuildConfig
 import com.projectx.fisioapp.repository.entitymodel.responses.UpdateAppointmentResponse
 import com.projectx.fisioapp.repository.entitymodel.responses.GetAppointmentsResponse
 import com.projectx.fisioapp.repository.entitymodel.responses.*
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 import java.util.*
@@ -28,16 +29,24 @@ internal interface APIV1FisioAppInterface {
     @PUT(BuildConfig.FISIOAPP_USER_SERVER_PATH + "/{id}")
     fun doUpdateUser(@Header("x-access-token") token: String,
                      @Path("id") id: String,
-                     @Field("name") name: String,
-                     @Field("lastName") lastName: String,
-                     @Field("email") email: String,
-                     @Field("isProfessional") isProfessional: Boolean,
-                     @Field("fellowshipNumber") fellowshipNumber: String,
-                     @Field("gender") gender: String,
-                     @Field("address") address: String,
-                     @Field("phone") phone: String,
-                     @Field("birthDate") birthDate: Date,
-                     @Field("nationalId") nationalId: String): Call<UpdateUserResponse>
+                     @Field("name") name: String?,
+                     @Field("lastName") lastName: String?,
+                     @Field("email") email: String?,
+                     @Field("isProfessional") isProfessional: Boolean?,
+                     @Field("fellowshipNumber") fellowshipNumber: String?,
+                     @Field("gender") gender: String?,
+                     @Field("address") address: String?,
+                     @Field("phone") phone: String?,
+                     @Field("birthDate") birthDate: Date?,
+                     @Field("nationalId") nationalId: String?): Call<UpdateUserResponse>
+
+    @Multipart
+    @PUT(BuildConfig.FISIOAPP_UPLOADS_USER_IMAGE_SERVER_PATH + "/users" + "/{id}")
+    fun doUpdateUserImage(@Header("x-access-token") token: String,
+                          @Path("id") id: String,
+                          @Part body: MultipartBody.Part): Call<UpdateUserImageResponse>
+    //,
+    //@Part name: RequestBody
 
 
     /******** SERVICES OPERATIONS *********/

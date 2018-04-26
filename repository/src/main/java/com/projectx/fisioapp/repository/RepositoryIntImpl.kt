@@ -1,6 +1,7 @@
 package com.projectx.fisioapp.repository
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import com.projectx.fisioapp.repository.cache.CacheIntImpl
 import com.projectx.fisioapp.repository.cache.CacheInteractor
 import com.projectx.fisioapp.repository.entitymodel.appointments.AppoinmentData
@@ -39,6 +40,8 @@ import com.projectx.fisioapp.repository.network.apifisioapp.apiv1.user.registeru
 import com.projectx.fisioapp.repository.network.apifisioapp.apiv1.user.registeruser.RegisterUserInteractor
 import com.projectx.fisioapp.repository.network.apifisioapp.apiv1.user.update.UpdateUserIntImpl
 import com.projectx.fisioapp.repository.network.apifisioapp.apiv1.user.update.UpdateUserInteractor
+import com.projectx.fisioapp.repository.network.apifisioapp.apiv1.user.updateuserimage.UpdateUserImageInteractor
+import com.projectx.fisioapp.repository.network.apifisioapp.apiv1.user.updateuserimage.UpdateUserImageIntImpl
 import retrofit2.Response.success
 import java.lang.ref.WeakReference
 
@@ -53,6 +56,7 @@ class RepositoryIntImpl(val context: Context) : RepositoryInteractor {
     private val getUser: GetUserInteractor = GetUserIntImpl()
     private val registerUser: RegisterUserInteractor = RegisterUserIntImpl()
     private val updateUser: UpdateUserInteractor = UpdateUserIntImpl()
+    private val updateUserImage: UpdateUserImageInteractor = UpdateUserImageIntImpl()
 
     // ***** Appointments *****
     private val getAllAppointments: GetAppointmentsInteractor = GetAppointmentsIntImpl()
@@ -117,6 +121,18 @@ class RepositoryIntImpl(val context: Context) : RepositoryInteractor {
         updateUser.execute(token, user,
                 success = { ok: Boolean, userData: UserData ->
                     success(ok, userData)
+                }, error = {
+                    error(it)
+                }
+        )
+    }
+
+    override fun updateUserImage(token: String, id: String, image: Drawable, success: (ok: Boolean, user: UserData, message: String) -> Unit, error: (errorMessage: String) -> Unit) {
+
+        // perform network request
+        updateUserImage.execute(token, id, image,
+                success = { ok: Boolean, userData: UserData, message: String ->
+                    success(ok, userData, message)
                 }, error = {
                     error(it)
                 }

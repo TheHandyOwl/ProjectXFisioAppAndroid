@@ -1,19 +1,33 @@
 package com.projectx.fisioapp.app.activity
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.v4.content.ContextCompat
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
+import com.projectx.fisioapp.BuildConfig
 import com.projectx.fisioapp.R
+import com.projectx.fisioapp.app.utils.CircleTransform
 import com.projectx.fisioapp.app.utils.toastIt
 import com.projectx.fisioapp.domain.interactor.ErrorCompletion
 import com.projectx.fisioapp.domain.interactor.users.getuser.GetUserIntImpl
 import com.projectx.fisioapp.domain.interactor.users.getuser.GetUserInteractor
 import com.projectx.fisioapp.domain.interactor.users.updateuser.UpdateUserIntImpl
 import com.projectx.fisioapp.domain.interactor.users.updateuser.UpdateUserInteractor
+import com.projectx.fisioapp.domain.interactor.users.updateuserimage.UpdateUserImageIntImpl
+import com.projectx.fisioapp.domain.interactor.users.updateuserimage.UpdateUserImageInteractor
 import com.projectx.fisioapp.domain.model.User
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_user_detail.*
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -22,6 +36,14 @@ class UserDetailActivity : ParentActivity() {
     private lateinit var user: User
     private var userWithChanges: User? = null
     private var calendar = Calendar.getInstance()
+
+    private var imageFilenameChanged: String? = null
+    private lateinit var imageFile: File
+
+    companion object {
+        private const val REQUEST_TAKE_PHOTO = 0
+        private const val REQUEST_SELECT_IMAGE_IN_ALBUM = 1
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +54,8 @@ class UserDetailActivity : ParentActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         setListeners()
+
+        roundedPhoto(R.drawable.no_image)
 
         getUser()
 
@@ -45,6 +69,14 @@ class UserDetailActivity : ParentActivity() {
     }
 
     private fun setListeners() {
+
+        ivPhoto.setOnClickListener {
+            try {
+                selectImageInAlbum()
+            } catch (e: Exception) {
+                Log.d("App", "Error: ${e.localizedMessage}")
+            }
+        }
 
         btnSave.setOnClickListener {
             updateUser()
@@ -80,6 +112,14 @@ class UserDetailActivity : ParentActivity() {
 
     }
 
+    private fun roundedPhoto(imageId: Int) {
+        val img = BitmapFactory.decodeResource(resources, imageId)
+        val round = RoundedBitmapDrawableFactory.create(resources, img)
+
+        round.isCircular = true
+        ivPhoto.setImageDrawable(round)
+    }
+
     private fun getUser() {
         val getUser: GetUserInteractor = GetUserIntImpl(this)
 
@@ -89,7 +129,7 @@ class UserDetailActivity : ParentActivity() {
                     uId,
                     success = {
                         user = it
-                        fillFileds(it)
+                        fillFields(it)
                     }, error = object : ErrorCompletion {
                         override fun errorCompletion(errorMessage: String) {
                             toastIt(baseContext, errorMessage)
@@ -115,19 +155,42 @@ class UserDetailActivity : ParentActivity() {
 
         userWithChanges = checkFields.first
 
-        val updateUser: UpdateUserInteractor = UpdateUserIntImpl(this)
-
+        // Update User Photo
+        val updateUserImage: UpdateUserImageInteractor = UpdateUserImageIntImpl(this)
         try {
-            updateUser.execute(
+            updateUserImage.execute(
                     token,
-                    userWithChanges as User,
-                    success = { ok: Boolean, user: User ->
+                    user.id,
+                    ivPhoto.drawable,
+                    success = { ok: Boolean, user: User, message: String ->
                         if (ok) {
-                            fillFileds(user)
-                            toastIt(this, "User updated")
+                            toastIt(this, "Message: $message")
+
+                            // Update user data
+                            val updateUser: UpdateUserInteractor = UpdateUserIntImpl(this)
+                            try {
+                                updateUser.execute(
+                                        token,
+                                        userWithChanges as User,
+                                        success = { ok: Boolean, user: User ->
+                                            if (ok) {
+                                                fillFields(user)
+                                                toastIt(this, "User updated")
+                                            }
+                                            else {
+                                                toastIt(this, "Success/error")
+                                            }
+                                        }, error = object : ErrorCompletion {
+                                    override fun errorCompletion(errorMessage: String) {
+                                        toastIt(baseContext, errorMessage)
+                                    }
+                                })
+                            } catch (e: Exception) {
+                                toastIt(this, "Error: " + e.localizedMessage )
+                            }
                         }
                         else {
-                            toastIt(this, "Success/error")
+                            toastIt(this, "There was an error uploading the image")
                         }
                     }, error = object : ErrorCompletion {
                         override fun errorCompletion(errorMessage: String) {
@@ -137,15 +200,17 @@ class UserDetailActivity : ParentActivity() {
         } catch (e: Exception) {
             toastIt(this, "Error: " + e.localizedMessage )
         }
+
     }
 
-    private fun fillBackgroundColorForFileds(fields: List<String>) {
+    private fun fillBackgroundColorForFields(fields: List<String>) {
 
-        val allFields : MutableList<View> = mutableListOf(lblName, lblLastName, lblLastName, lblEmail, lblAddress, lblPhone, lblBirthdate, lblNationalID, lblFellowshipNumber,lblRegistrationDate, lblLastLoginDate, lblProfessional, lblGender)
+        val allFields : MutableList<View> = mutableListOf(lblPhoto, lblName, lblLastName, lblLastName, lblEmail, lblAddress, lblPhone, lblBirthdate, lblNationalID, lblFellowshipNumber,lblRegistrationDate, lblLastLoginDate, lblProfessional, lblGender)
         allFields.map { it.background = ContextCompat.getDrawable(this, R.drawable.gradient_left_column_fields) }
 
         fields.map{
             when (it) {
+                "lblPhoto" -> lblPhoto.background = ContextCompat.getDrawable(this, R.drawable.gradient_left_column_fields_error)
                 "lblName" -> lblName.background = ContextCompat.getDrawable(this, R.drawable.gradient_left_column_fields_error)
                 "lblLastName" -> lblLastName.background = ContextCompat.getDrawable(this, R.drawable.gradient_left_column_fields_error)
                 "lblEmail" -> lblEmail.background = ContextCompat.getDrawable(this, R.drawable.gradient_left_column_fields_error)
@@ -161,26 +226,39 @@ class UserDetailActivity : ParentActivity() {
         }
     }
 
-
-    private fun fillFileds(user: User) {
-        etName.setText(user.name)
-        etLastName.setText(user.lastName)
-        etEmail.setText(user.email)
-        etAddress.setText(user.address)
-        etPhone.setText(user.phone)
-        etBirthdate.setText(formatDateToString(user.birthDate))
-        etNationalID.setText(user.nationalId)
-        etFellowshipNumber.setText(user.fellowshipNumber)
-        etRegistrationDate.setText(formatDateToString(user.registrationDate))
-        etLastLoginDate.setText(formatDateToString(user.lastLoginDate))
-        swProfesional.isChecked = user.isProfessional
-        if (user.gender == "female") {
-            rbFemale.isChecked = true
-            rbMale.isChecked = false
-        } else if (user.gender == "male") {
-            rbMale.isChecked = true
-            rbFemale.isChecked = false
+    private fun fillFields(user: User) {
+        user.img?.let {
+            imageFilenameChanged = it
+            Picasso.with(this)
+                    .load("${BuildConfig.HTTP_SERVER}${BuildConfig.FISIOAPP_USER_IMAGE_SERVER_PATH}/$imageFilenameChanged")
+                    .transform(CircleTransform())
+                    .placeholder(R.drawable.no_image)
+                    .error(android.R.drawable.ic_menu_report_image)
+                    .into(ivPhoto)
         }
+        user.name?.let { etName.setText(it) }
+        user.lastName?.let { etLastName.setText(it) }
+        user.email?.let { etEmail.setText(it) }
+        user.address?.let { etAddress.setText(it) }
+        user.phone?.let { etPhone.setText(it) }
+        user.birthDate?.let { etBirthdate.setText(formatDateToString(it)) }
+        user.nationalId?.let { etNationalID.setText(it) }
+        user.fellowshipNumber?.let { etFellowshipNumber.setText(it) }
+        user.registrationDate?.let { etRegistrationDate.setText(formatDateToString(it)) }
+        user.lastLoginDate?.let { etLastLoginDate.setText(formatDateToString(it)) }
+        user.name?.let { etName.setText(it) }
+        user.name?.let { etName.setText(it) }
+        user.isProfessional?.let { swProfesional.isChecked = it }
+        user.gender?.let {
+            if (it == "female") {
+                rbFemale.isChecked = true
+                rbMale.isChecked = !rbFemale.isChecked
+            } else if (it == "male") {
+                rbMale.isChecked = true
+                rbFemale.isChecked = !rbMale.isChecked
+            }
+        }
+
     }
 
     private fun getFieldsOrErrors(): Pair<User?, List<String>?> {
@@ -195,12 +273,13 @@ class UserDetailActivity : ParentActivity() {
             fieldsWithErrors.add("lblGender")
         }
 
-        fillBackgroundColorForFileds(fieldsWithErrors)
+        fillBackgroundColorForFields(fieldsWithErrors)
 
         if (fieldsWithErrors.size != 0) return Pair(null, fieldsWithErrors)
 
         val user = User(
                 uId,
+                imageFilenameChanged,
                 etName.text.toString(),
                 etLastName.text.toString(),
                 etEmail.text.toString(),
@@ -209,30 +288,79 @@ class UserDetailActivity : ParentActivity() {
                 gender,
                 etAddress.text.toString(),
                 etPhone.text.toString(),
-                formatStringToDate(etBirthdate.text.toString()),
+                etBirthdate.text.toString()?.let {  formatStringToDate(it) },
                 etNationalID.text.toString(),
-                formatStringToDate(etRegistrationDate.text.toString()),
-                formatStringToDate(etLastLoginDate.text.toString())
+                etRegistrationDate.text.toString()?.let { formatStringToDate(it) },
+                etLastLoginDate.text.toString().let { formatStringToDate(it) }
         )
         return Pair(user, null)
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun updateBirthdateInView() {
         val myFormat = "dd/MM/yyyy" // Choose the format you need
         val sdf = SimpleDateFormat(myFormat)
-        etBirthdate.setText(sdf.format(calendar.getTime()))
+        etBirthdate.setText(sdf.format(calendar.time))
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun formatDateToString(date: Date): String{
         val format = SimpleDateFormat("dd/MM/yyyy")
         val d = format.format(date)
         return d
     }
 
-    private fun formatStringToDate(date: String): Date {
-        val sdf = SimpleDateFormat("dd/MM/yyyy")
-        val d: Date = sdf.parse(date)
-        return d
+    @SuppressLint("SimpleDateFormat")
+    private fun formatStringToDate(date: String): Date? {
+        try {
+            val sdf = SimpleDateFormat("dd/MM/yyyy")
+            val d: Date = sdf.parse(date)
+            return d
+        } catch (e: Exception) {
+            Log.e("Error", e.localizedMessage)
+        }
+        return null
+
+    }
+
+    private fun selectImageInAlbum() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "image/*"
+        if (intent.resolveActivity(packageManager) != null) {
+            try {
+                startActivityForResult(intent, REQUEST_SELECT_IMAGE_IN_ALBUM)
+            } catch (e: Exception) {
+                Log.d("App", "Error: ${e.localizedMessage}")
+            }
+
+        }
+    }
+    /*
+    fun takePhoto() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivityForResult(intent, REQUEST_TAKE_PHOTO)
+        }
+    }
+    */
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+        when (requestCode) {
+            REQUEST_SELECT_IMAGE_IN_ALBUM -> {
+                if (resultCode === Activity.RESULT_OK) {
+                    Toast.makeText(this, "Picture taken!", Toast.LENGTH_SHORT).show()
+                    // by this point we have the camera photo on disk
+                    val uri = data.data
+                    uri.let {
+                        val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, it)
+                        bitmap.let { ivPhoto.setImageBitmap(it) }
+                    }
+                    imageFile = File(uri.toString())
+                } else { // Result was a failure
+                    Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
 }

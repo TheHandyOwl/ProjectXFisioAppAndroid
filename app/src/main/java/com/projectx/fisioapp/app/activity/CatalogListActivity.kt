@@ -1,6 +1,5 @@
 package com.projectx.fisioapp.app.activity
 
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -121,7 +120,7 @@ class CatalogListActivity : ParentActivity() {
 
         recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, list, mTwoPane)
         // set two columns with the elements
-        recyclerView.layoutManager = GridLayoutManager(this, 2)
+        recyclerView.layoutManager = GridLayoutManager(this, 1)
     }
 
     private fun getCatalogList(context: Context, forceUpdate: Boolean) {

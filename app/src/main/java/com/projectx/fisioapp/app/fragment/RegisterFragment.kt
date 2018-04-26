@@ -21,7 +21,7 @@ class RegisterFragment : Fragment() {
     private var pass: EditText? = null
 
     companion object {
-        private val TAG = "RegisterFragment"
+        private const val TAG = "RegisterFragment"
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -48,9 +48,9 @@ class RegisterFragment : Fragment() {
     }
 
     private fun setFakeDataInForm() {
-        name?.setText( "anotherFisio")
-        email?.setText( "anotherfisio@invalid.com")
-        pass?.setText("12345678")
+        name?.setText( getString(R.string.fake_register_name_default))
+        email?.setText( getString(R.string.fake_register_user_default))
+        pass?.setText(getString(R.string.fake_register_password_default))
     }
 
     override fun onAttach(context: Context?) {
