@@ -28,19 +28,19 @@ class GetUserIntImpl(context: Context) : GetUserInteractor {
     private fun entityMapper(userData: UserData): User {
         return User(
                 userData.id,
-                userData.img,
+                userData?.img,
                 userData.name,
-                userData.lastName,
+                userData?.lastName,
                 userData.email,
-                userData.isProfessional,
-                userData.fellowshipNumber,
-                userData.gender,
-                userData.address,
-                userData.phone,
-                userData.birthDate,
-                userData.nationalId,
-                userData.registrationDate,
-                userData.lastLoginDate
+                userData?.isProfessional,
+                userData?.fellowshipNumber,
+                userData?.gender,
+                userData?.address,
+                userData?.phone,
+                userData?.birthDate,
+                userData?.nationalId,
+                userData?.registrationDate,
+                userData?.lastLoginDate
         )
     }
 
