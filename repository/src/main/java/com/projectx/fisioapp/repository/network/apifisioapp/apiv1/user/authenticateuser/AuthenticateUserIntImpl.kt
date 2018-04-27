@@ -24,9 +24,13 @@ internal class AuthenticateUserIntImpl : AuthenticateUserInteractor {
             override fun onResponse(call: Call<AuthenticateUserResponse>, response: Response<AuthenticateUserResponse>) {
                 response.body().let {
                     val backResponse = response.body()
-                    val user = backResponse?.result?.user as UserData
-                    val token = backResponse?.result?.token as String
-                    backResponse.let { success(user, token ) }
+                    try {
+                        val user = backResponse?.result?.user as UserData
+                        val token = backResponse?.result?.token as String
+                        backResponse.let { success(user, token) }
+                    } catch (e: Exception){
+                        backResponse.let { error("User not found") }
+                    }
                 }
             }
 
